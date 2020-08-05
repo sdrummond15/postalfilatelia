@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package>
+    <name>pedroteixeira+PedroTeixeira_Correios</name>
+    <version>4.8.1</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+    <channel>8cd11697ac86585c707ed05c149e1d3e</channel>
+    <extends/>
+    <summary>M&#xF3;dulo de c&#xE1;lculo de PAC, Sedex, E-Sedex, Sedex 10, Sedex Hoje, Sedex a Cobrar, PAC GF e Carta Comercial.</summary>
+    <description>Utilizando peso volum&#xE9;trico para c&#xE1;lculo de todos os servi&#xE7;os e compat&#xED;vel com a valida&#xE7;&#xE3;o de dimens&#xF5;es dos Correios.&#xD;
+&#xD;
+Servi&#xE7;os suportados:&#xD;
+&#xD;
+- Sedex Sem Contrato&#xD;
+- Sedex Com Contrato&#xD;
+- E-Sedex Com Contrato&#xD;
+- PAC Sem Contrato&#xD;
+- PAC Com Contrato&#xD;
+- Sedex 10&#xD;
+- Sedex HOJE&#xD;
+- Sedex a Cobrar&#xD;
+- PAC GF&#xD;
+- Carta Comercial&#xD;
+- Carta Comercial Registrada&#xD;
+&#xD;
+Conta com identifica&#xE7;&#xE3;o de erros dos Correios, m&#xE3;o pr&#xF3;pria, aviso de recebimento, valor declarado, captura do prazo de entrega dos Correios, adicionar mais dias ao prazo dos Correios, identifica o volume dos produtos por atributo, tracking em tempo real, cache, pacotes de grandes formato e produtos encaixados.&#xD;
+&#xD;
+Mais informa&#xE7;&#xF5;es em https://pedroteixeira.io.</description>
+    <notes>Bugfix:&#xD;
+&#xD;
+- Corrige atualiza&#xE7;&#xF5;es das vers&#xF5;es 4.7.1 e 4.7.2</notes>
+    <authors><author><name>Pedro Teixeira</name><user>teixeirapedro</user><email>hello@pedroteixeira.io</email></author></authors>
+    <date>2017-05-17</date>
+    <time>12:37:37</time>
+    <contents><target name="magecommunity"><dir name="PedroTeixeira"><dir name="Correios"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><dir name="Form"><file name="Button.php" hash="1ed1545f8c6b4426b6c3c93ccc4702a4"/></dir></dir></dir></dir></dir><dir name="Helper"><file name="Data.php" hash="c12c9608f042dc0a4172e8cb9bf6f6a5"/></dir><dir name="Model"><file name="Cache.php" hash="63903ef57e86e2be3cd79787063f3946"/><dir name="Carrier"><file name="CorreiosMethod.php" hash="26177fc07281c34ef064ebb8d8b4548a"/></dir><dir name="Http"><dir name="Client"><dir name="Adapter"><file name="Socket.php" hash="76da85f117c3f9950164a5d90500d82f"/></dir></dir></dir><file name="Observer.php" hash="9b5c20f5664eb668b43e385ce9f2a3c2"/><file name="Postmethod.php" hash="a40a5bf7bb14924266cc79424248389e"/><dir name="Resource"><dir name="Postmethod"><file name="Collection.php" hash="7d0062d4d95009dee024566dd1c00d23"/></dir><file name="Postmethod.php" hash="e8b7ad2712dc27d3deced86fe4cd4ea3"/></dir><file name="Sigepweb.php" hash="b342be77db3e09cc7a81ff5ad0fd5216"/><dir name="Source"><file name="CacheMode.php" hash="b34ae611b8bf913e4b646f4a156cc2a4"/><file name="PostMethods.php" hash="d0447898a44d0b01e9a7ef8136b12f86"/><file name="WeightType.php" hash="4bf1608fb6b665dcc7d834ca35eee174"/></dir><file name="Sro.php" hash="d5b19c10445887ba5cc5efbb10f25eb3"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="SigepwebController.php" hash="2ff1a5089997937ca80500428ad21107"/></dir></dir><dir name="etc"><file name="config.xml" hash="62d4784c44581407a64cc7045ffa3970"/><file name="system.xml" hash="71307fe8f6784d8bb42d0fa223a30016"/></dir><dir name="sql"><dir name="pedroteixeira_correios_setup"><file name="install-4.0.0.php" hash="eda109c002d9130fc1ce807784aa60a3"/><file name="install-4.4.0.php" hash="889c7376ee7bdd30bf07616b4f365e3b"/><file name="install-4.5.0.php" hash="e0daaac3649b166a33928da3844ad965"/><file name="install-4.6.0.php" hash="5168cdf9b1e60480d5bc90951c69cb20"/><file name="install-4.7.0.php" hash="ad7b3434d1c5fbb0b49212e8bc5923b9"/><file name="install-4.8.0.php" hash="8fff8c39f26c7821bf5c58ac4545c6d4"/><file name="install-4.8.1.php" hash="8fff8c39f26c7821bf5c58ac4545c6d4"/><file name="upgrade-4.0.0-4.1.0.php" hash="ca42fdabb0975f60d8cf5ef5ab122acd"/><file name="upgrade-4.1.0-4.2.0.php" hash="319cd1c4ddaa745da9af4a5111aa1534"/><file name="upgrade-4.2.0-4.3.0.php" hash="783e854d19b0e4915360cc1ec8b4d2d0"/><file name="upgrade-4.3.0-4.4.0.php" hash="982f41d3a113d21c4008de7e63918e45"/><file name="upgrade-4.4.0-4.5.0.php" hash="95dfd40fa6469a711b4b65a331f0b1b7"/><file name="upgrade-4.5.0-4.6.0.php" hash="24686aec7822436598e94680e3e6a948"/><file name="upgrade-4.6.0-4.7.0.php" hash="d12205fcbe16e21bdf233eae06500998"/><file name="upgrade-4.7.0-4.7.1.php" hash="783e854d19b0e4915360cc1ec8b4d2d0"/><file name="upgrade-4.7.1-4.7.2.php" hash="783e854d19b0e4915360cc1ec8b4d2d0"/><file name="upgrade-4.7.2-4.8.0.php" hash="783e854d19b0e4915360cc1ec8b4d2d0"/><file name="upgrade-4.8.0-4.8.1.php" hash="802212745bf03329ebaf0851f2bae124"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="PedroTeixeira_Correios.xml" hash="e714579bed97c85f2bcc3988dec271da"/></dir></target><target name="magelocale"><dir name="pt_BR"><file name="PedroTeixeira_Correios.csv" hash="1a076f2c363fbc1dce2fcfb1abeb0c99"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php><package><name/><channel>connect.magentocommerce.com/core</channel><min/><max/></package></required></dependencies>
+</package>

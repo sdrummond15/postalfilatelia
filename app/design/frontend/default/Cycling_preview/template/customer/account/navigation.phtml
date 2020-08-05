@@ -1,0 +1,44 @@
+<?php
+    $_links = $this->getLinks();
+    $_count = count($_links);
+    Mage::register('vmenu_levels', '');
+    Mage::register('vmenu_responsive_levels', '');
+?>
+
+<?php if ($_count): ?>
+    
+    <div class="data-control-id-3165 bd-vmenu-1" data-responsive-menu="true" data-responsive-levels="">
+        <div class="data-control-id-97294 bd-block-6 block-account">
+            <div class="data-control-id-97295 bd-blockheader bd-tagstyles">
+                <h4><?php echo $this->__('My Account'); ?><h4>
+            </div>
+            <div class="data-control-id-97296 bd-blockcontent bd-tagstyles shape-only">
+                
+                <div class="data-control-id-126090 bd-verticalmenu-3">
+                    <div class="bd-container-inner">
+                        <ul class="data-control-id-126091 bd-menu-31 nav nav-pills">
+                        <?php $_links = $this->getLinks(); ?>
+                        <?php $_index = 1; ?>
+                        <?php foreach ($_links as $_link): ?>
+                            <?php $_last = ($_index++ >= $_count); ?>
+                            <?php $_active = $this->isActive($_link); ?>
+                            <li class="data-control-id-126092 bd-menuitem-31">
+                                <a<?php if ($_active): ?> class="active"<?php endif ?> href="<?php echo $_active ? '#' : $_link->getUrl() ?>">
+                                    <?php echo $_link->getLabel() ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+<?php endif ?>
+
+<?php
+    Mage::unregister('vmenu_levels');
+    Mage::unregister('vmenu_responsive_levels');
+?>

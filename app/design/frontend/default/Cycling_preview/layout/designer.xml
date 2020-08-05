@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0d66eede-8670-4ba8-8ec3-adf31d723d71">
+
+    <designer_template_default>
+        <update handle="MAP_popup" />
+
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/3columns.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <action method="unsetChildren"/>
+            <block type="core/template" name="sample_data_content" as="sample_data" template="designer/sample-data/lorem-ipsum.phtml"/>
+        </reference>
+        <reference name="left">
+            <action method="unsetChildren"/>
+            <block type="core/template" name="sample_data_block1" as="sample_data_block1" template="designer/sample-data/block.phtml"/>
+        </reference>
+        <reference name="right">
+            <action method="unsetChildren"/>
+            <block type="core/template" name="sample_data_block2" as="sample_data_block2" template="designer/sample-data/block.phtml"/>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <name>home</name>
+                <params>
+                    <label>Home</label>
+                    <title>Home</title>
+                    <link>index.php</link>
+                </params>
+            </action>
+            <action method="addCrumb">
+                <name>sample-page</name>
+                <params>
+                    <label>Sample Page</label>
+                    <title>Sample Page</title>
+                </params>
+            </action>
+        </reference>
+    </designer_template_default>
+
+</layout>

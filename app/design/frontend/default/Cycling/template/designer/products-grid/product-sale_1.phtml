@@ -1,0 +1,16 @@
+<?php if ($_product = $this->getProduct()): ?>
+    <?php
+    $_specialPrice = $_product->getSpecialPrice();
+
+    $_isSpecialPricePeriod = Mage::app()->getLocale()->isStoreDateInInterval(
+        Mage::app()->getStore(),
+        $_product->getSpecialFromDate(),
+        $_product->getSpecialToDate()
+    );
+
+    if ($_specialPrice && $_isSpecialPricePeriod): ?>
+        <div class=" bd-productsaleicon bd-productsale-1">
+            <span>Sale!</span>
+        </div>
+    <?php endif ?>
+<?php endif ?>

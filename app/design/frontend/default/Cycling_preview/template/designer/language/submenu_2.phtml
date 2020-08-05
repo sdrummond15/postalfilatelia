@@ -1,0 +1,16 @@
+<?php if (count($this->getContext()->getStores())): ?>
+    <div class="bd-menu-10-popup">
+        
+        <ul class="data-control-id-141288 bd-menu-10">
+        <?php foreach ($this->getContext()->getStores() as $_lang): ?>
+            <li class="data-control-id-141289 bd-menuitem-10">
+    <a class="<?php if ($_lang->getId() == $this->getContext()->getCurrentStoreId()): ?> active<?php endif ?>"
+       href="<?php echo $_lang->getCurrentUrl() ?>">
+        <span><?php echo $this->getContext()->htmlEscape($_lang->getName()) ?></span>
+    </a>
+</li>
+        <?php endforeach ?>
+        </ul>
+        
+    </div>
+<?php endif ?>

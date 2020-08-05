@@ -1,0 +1,8 @@
+<?php
+    $_data = array(
+        'product' => $this->getProduct()
+    );
+?>
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/desc', $this->getControlId())->addData($_data)->toHtml() ?>
+<?php endif ?>

@@ -1,0 +1,18 @@
+<?php $_cutLength = intval('65'); ?>
+<?php $_product = $this->getProduct() ?>
+<?php $_cut = $this->getUseCut() ?>
+<?php if ($_product): ?>
+    <div class="data-control-id-2732 bd-productdesc-13">
+        <?php $_desc = $this->helper('catalog/output')->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+        <?php if ($_cut && $_cutLength > 0): ?>
+        <?php echo substr($_desc, 0, $_cutLength) . preg_replace('/[\s!\?\.;][\s\S]*/', '...', substr($_desc, $_cutLength)) ?>
+        <a class="link-learn"
+           href="<?php echo $_product->getProductUrl() ?>"
+           title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+            <?php echo $this->__('Learn More') ?>
+        </a>
+    <?php else: ?>
+        <?php echo $_desc ?>
+    <?php endif ?>
+    </div>
+<?php endif ?>

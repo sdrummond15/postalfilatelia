@@ -1,0 +1,158 @@
+<div class="data-control-id-265 bd-productprice-2">
+    <span class="price">
+    <?php if (($_priceHtml = $this->getContent())): ?>
+        <?php
+        $_priceHtml = mb_convert_encoding($_priceHtml, 'HTML-ENTITIES', 'UTF-8');
+        $_priceHtml = str_replace("\r", '', $_priceHtml);
+        $_priceHtml = str_replace('&', 'ESCAPE_CHAR_AMP', $_priceHtml);
+        $_dom = new Zend_Dom_Query($_priceHtml);
+
+        $_priceBox = $_dom->query('.price-box');
+        $_doc = $_priceBox->getDocument();
+        $_xpath = new DOMXPath($_doc);
+
+        $_scripts =$_xpath->query('//script');
+        foreach ($_scripts as $_script) {
+            $_script->nodeValue = str_replace(
+                array('<', '>'),
+                array('ESCAPE_CHAR_LT', 'ESCAPE_CHAR_GT'),
+                $_script->nodeValue
+            );
+        }
+
+        /*
+            .old-price .price-label
+        */
+        $_oldPriceLabel = $_xpath->query(
+             '//*[@class = "old-price"]//*[@class = "price-label"]'
+        );
+
+        foreach ($_oldPriceLabel as $_label) {
+            // 
+            if ($_labelParent = $_label->parentNode) {
+                $_labelParent->removeChild($_label);
+            }
+            //
+        }
+
+        /*
+            .label,
+            .special-price .price-label,
+            .minimal-price .price-label,
+            .price-from .price-label,
+            .price-to .price-label
+        */
+        $_regularPriceLabel = $_xpath->query(
+            '//*[@class = "label label-default"] | '
+            . '//*[@class = "special-price" '
+            . 'or @class = "minimal-price" '
+            . 'or @class = "price-from" '
+            . 'or @class = "price-to"]//*[@class = "price-label"]'
+        );
+
+        foreach ($_regularPriceLabel as $_label) {
+            // 
+            if ($_labelParent = $_label->parentNode) {
+                $_labelParent->removeChild($_label);
+            }
+            //
+        }
+
+        /*
+            .price-excluding-tax,
+            .price-including-tax,
+            .regular-price,
+            .minimal-price-link,
+            .minimal-price,
+            .special-price,
+            .price-from,
+            .price-to
+         */
+        $_regularPrice = $_xpath->query(
+           '//*[@class = "price-excluding-tax" '
+           . 'or @class = "price-including-tax" '
+           . 'or @class = "minimal-price-link" '
+           . 'or @class = "minimal-price" '
+           . 'or @class = "regular-price" '
+           . 'or @class = "special-price" '
+           . 'or @class = "price-from" '
+           . 'or @class = "price-to"]'
+        );
+
+        foreach ($_regularPrice as $_price) {
+            if ($_nodeClass = $_price->getAttributeNode('class')) {
+                $_nodeClass->value .= ' data-control-id-230 bd-pricetext-5';
+            } else {
+                $_price->setAttribute('class', 'data-control-id-230 bd-pricetext-5');
+            }
+            $_priceAmount = $_xpath->query('.//*[@class = "price"]', $_price);
+            if ($_priceAmount->length) {
+                if ($_nodeClass = $_priceAmount->item(0)->getAttributeNode('class')) {
+                    $_nodeClass->value .= ' data-control-id-229 bd-container-7 bd-tagstyles bd-custom-blockquotes bd-custom-button bd-custom-image bd-custom-table';
+                }
+            }
+        }
+
+        // 
+        $_priceTo = $_xpath->query('//*[contains(@class, "price-to")]/span[@class = "price"]');
+        foreach ($_priceTo as $_price) {
+            $_priceFrom = $_xpath->query('./preceding-sibling::p[contains(@class, "price-from")]/span[@class = "price"]', $_price->parentNode);
+
+            if ($_priceFrom->length) {
+                $_priceFrom->item(0)->nodeValue .= ' - ' . $_price->nodeValue;
+            }
+
+            $_price->parentNode->parentNode->removeChild($_price->parentNode);
+        }
+
+        $_minimalPrice = $_xpath->query('//*[contains(@class, "minimal-price-link")]');
+        foreach ($_minimalPrice as $_price) {
+            $_normalPrice = $_xpath->query('./preceding-sibling::*[contains(@class, "regular-price")]/span[@class = "price"]', $_price);
+            $_minPriceSpan = $_xpath->query('span[@class = "price"]', $_price);
+            if ($_minPriceSpan->length && $_normalPrice->length) {
+                $_minPriceSpan->item(0)->nodeValue = $_minPriceSpan->item(0)->nodeValue . ' - ' . $_normalPrice->item(0)->nodeValue;
+                $_normalPrice->item(0)->parentNode->parentNode->removeChild($_normalPrice->item(0)->parentNode);
+            }
+        }
+        //
+
+        /*
+            .old-price
+        */
+        $_oldPrice = $_xpath->query(
+            '//*[@class = "old-price"]'
+        );
+
+        foreach ($_oldPrice as $_price) {
+            // 
+                if ($_nodeClass = $_price->getAttributeNode('class')) {
+                    $_nodeClass->value .= ' data-control-id-264 bd-pricetext-6';
+                } else {
+                    $_price->setAttribute('class', 'data-control-id-264 bd-pricetext-6');
+                }
+                $_priceAmount = $_xpath->query('.//*[@class = "price"]', $_price);
+                if ($_priceAmount->length) {
+                    if ($_nodeClass = $_priceAmount->item(0)->getAttributeNode('class')) {
+                        $_nodeClass->value .= ' data-control-id-263 bd-container-8 bd-tagstyles bd-custom-blockquotes bd-custom-button bd-custom-image bd-custom-table';
+                    }
+                }
+                // 
+            //
+        }
+
+        if (count($_priceBox)) {
+            $_html = '';
+            foreach ($_priceBox->current()->childNodes as $_boxNode) {
+                $_html .= $_doc->saveXml($_boxNode, LIBXML_NOEMPTYTAG);
+            }
+            $_html = str_replace(
+                array('ESCAPE_CHAR_AMP', 'ESCAPE_CHAR_LT', 'ESCAPE_CHAR_GT'),
+                array('&', '<', '>'),
+                $_html
+            );
+            echo $_html;
+        }
+        ?>
+    <?php endif ?>
+    </span>
+</div>

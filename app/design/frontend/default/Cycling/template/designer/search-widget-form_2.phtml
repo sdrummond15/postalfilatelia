@@ -1,0 +1,34 @@
+<?php
+/* @var $this Mage_Core_Block_Template */
+/* @var $catalogSearchHelper Mage_Catalogsearch_Helper_Data */
+$catalogSearchHelper =  $this->helper('catalogsearch');
+?>
+
+<form id="search_mini_form" class=" bd-searchwidget-2 form-inline" name="search" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+    <div class="bd-container-inner">
+        <div class="bd-search-wrapper">
+            
+                
+                <div class="bd-input-wrapper">
+                    <input id="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"
+			   type="text" class=" bd-bootstrapinput-2 form-control input-sm" placeholder="Search" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength() ?>">
+                </div>
+                
+                <div class="bd-button-wrapper">
+                    <input type="submit" class=" bd-button-23" value="Search"/>
+                </div>
+        </div>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
+            //<![CDATA[
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', '');
+            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+
+            jQuery('.bd-searchwidget-2 .bd-icon-6').on('click', function (e) {
+                e.preventDefault();
+                jQuery('#search_mini_form').submit();
+            });
+            //]]>
+        </script>
+    </div>
+</form>

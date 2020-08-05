@@ -1,0 +1,7 @@
+<div class=" bd-productsgridbar-30">
+    <div class="bd-container-inner">
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/pagination-bar', 2)->setContext($this)->toHtml() ?>
+<?php endif ?>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<?php if ($_product = $this->getProduct()): ?>
+    <?php
+        $_label = $_product->getData('small_image_label');
+        if (empty($_label)) {
+            $_label = $_product->getName();
+        }
+
+        $_label = $this->stripTags($_label, null, true)
+    ?>
+    <a class="data-control-id-2643 bd-productimage-7" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_label ?>">
+        <img class="data-control-id-2642 bd-imagestyles" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image') ?>" alt="<?php echo $_label ?>" />
+    </a>
+<?php endif ?>

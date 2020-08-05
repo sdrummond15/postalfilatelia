@@ -1,0 +1,9 @@
+<div class="data-control-id-2756 bd-rating">
+    <?php
+    $_percent = $this->getPercent() ? $this->getPercent() : 0;
+    $_activeItems = intval($_percent / 20);
+    ?>
+    <?php for ($i = 1; $i <= 5; $i++): ?>
+        <span class="data-control-id-2755 bd-icon-3 <?php if ($i <= $_activeItems) echo " active" ?>"></span>
+    <?php endfor ?>
+</div>

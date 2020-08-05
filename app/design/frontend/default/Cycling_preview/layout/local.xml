@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0d66eede-8670-4ba8-8ec3-adf31d723d71">
+    <default>
+        <reference name="header">
+            <action method="unsetChild">
+                <name>store_language</name>
+            </action>
+            <action method="unsetChild">
+                <name>top.menu</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <action method="setTemplate">
+                <template>designer/contentColumn.phtml</template>
+            </action>
+        </reference>
+        <reference name="root">
+            <block type="checkout/cart_sidebar" name="cart.popup_link" template="checkout/cart/popup_link.phtml"/>
+            <block type="directory/currency" name="currency_button" template="directory/currency.phtml"/>
+        </reference>
+        <reference name="right">
+            <remove name="paypal.partner.right.logo"/>
+            <remove name="right.permanent.callout"/>
+            <action method="unsetChild">
+                <name>cart_sidebar</name>
+            </action>
+            <action method="unsetChild">
+                <name>catalog.compare.sidebar</name>
+            </action>
+        </reference>
+        <reference name="left">
+            <remove name="left.permanent.callout" />
+            <remove name="tags_popular" />
+            <action method="unsetChild"><name>left.newsletter</name></action>
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+
+            <action method="insert"><blockName>cart_sidebar</blockName></action>
+            <block type="core/template" name="block.vmenu" as="block.vmenu" template="page/menu/vmenu.phtml" after="cart_sidebar"></block>
+            <action method="insert"><blockName>catalog.compare.sidebar</blockName><siblingName>block.vmenu</siblingName><after>1</after></action>
+            <action method="insert"><blockName>left.newsletter</blockName><siblingName>catalog.compare.sidebar</siblingName><after>1</after></action>
+        </reference>
+        <reference name="head">
+            <!-- dynamic includes -->
+        </reference>
+        <reference name="head">
+            <!-- static includes -->
+            <action method="removeItem">
+                <type>skin_css</type>
+                <name>css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="footer">
+            <action method="unsetChildren"/>
+            <block type="core/template" template="cms/footer-links.phtml" name="block_cms_footer_links"/>
+        </reference>
+    </default>
+
+    <catalog_category_default>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/products.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list">
+            <block type="core/template" name="default.product_list.short_desc" as="short_desc" template="catalog/product/list/short_desc.phtml"/>
+        </reference>
+        <reference name="left">
+            <remove name="currency"/>
+            <action method="unsetChild"><name>catalog.leftnav</name></action>
+            <action method="insert"><name>catalog.leftnav</name><siblingName>cart_sidebar</siblingName><after>1</after></action>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_layered>
+        <reference name="root">
+            <action method="setTemplate"><template>page/products.phtml</template></action>
+        </reference>
+        <reference name="product_list">
+            <block type="core/template" name="layered.product_list.short_desc" as="short_desc" template="catalog/product/list/short_desc.phtml"/>
+        </reference>
+        <reference name="left">
+            <remove name="currency"/>
+            <action method="unsetChild"><name>catalog.leftnav</name></action>
+            <action method="insert"><name>catalog.leftnav</name><siblingName>cart_sidebar</siblingName><after>1</after></action>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_advanced_index>
+        <reference name="left">
+            <remove name="right_currency"/>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/page.phtml</template></action>
+        </reference>
+    </catalogsearch_advanced_index>
+
+    <catalogsearch_result_index>
+        <reference name="left">
+            <remove name="currency"/>
+            <action method="unsetChild"><name>catalog.leftnav</name></action>
+            <action method="insert"><name>catalog.leftnav</name><siblingName>cart_sidebar</siblingName><after>1</after></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/products.phtml</template></action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalogsearch_advanced_result>
+        <reference name="left">
+            <remove name="right_currency"/>
+            <action method="unsetChild"><name>catalog.leftnav</name></action>
+            <action method="insert"><name>catalog.leftnav</name><siblingName>cart_sidebar</siblingName><after>1</after></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/products.phtml</template></action>
+        </reference>
+    </catalogsearch_advanced_result>
+
+    <catalogsearch_term_popular>
+        <reference name="root">
+            <action method="setTemplate"><template>page/page.phtml</template></action>
+        </reference>
+    </catalogsearch_term_popular>
+
+    <tag_list_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/page.phtml</template></action>
+        </reference>
+    </tag_list_index>
+
+    <catalog_product_view translate="label">
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/product_overview.phtml</template>
+            </action>
+        </reference>
+        <reference name="product.info">
+            <block type="core/template" name="product.info.short_desc" as="short_desc" template="catalog/product/view/short_desc.phtml"/>
+            <block type="catalog/product_view_tabs" name="product.info.tabs" as="info_tabs" template="catalog/product/view/tabs.phtml">
+                <block type="review/form" name="product.review.form" as="review_form"/>
+                <action method="addTab" translate="title" module="catalog"><alias>description</alias><title>Product Description</title><block>catalog/product_view_description</block><template>catalog/product/view/description.phtml</template></action>
+                <action method="addTab" translate="title" module="catalog"><alias>upsell_products</alias><title>We Also Recommend</title><block>catalog/product_list_upsell</block><template>catalog/product/list/upsell.phtml</template></action>
+                <action method="addTab" translate="title" module="catalog"><alias>additional</alias><title>Additional Information</title><block>catalog/product_view_attributes</block><template>catalog/product/view/attributes.phtml</template></action>
+                <action method="addTab" translate="title" module="tag"><alias>product_tags</alias><title>Product Tags</title><block>tag/product_list</block><template>tag/list.phtml</template></action>
+                <action method="addTab" translate="title" module="review"><alias>reviews</alias><title>Product Reviews</title><block>review/product_view_list</block><template>review/product/view/list.phtml</template></action>
+            </block>
+            <block type="catalog/product_view_media" name="product.info.image" as="image" template="catalog/product/view/image.phtml"/>
+            <block type="catalog/product_view_media" name="product.info.image_thumbnails" as="image_thumbnails" template="catalog/product/view/image_thumbnails.phtml"/>
+        </reference>
+        <reference name="product_tags">
+            <block type="page/html_wrapper" name="product.tag.list.list.before" as="list_before" translate="label">
+                <label>Tags List Before</label>
+                <action method="setMayBeInvisible"><value>1</value></action>
+            </block>
+        </reference>
+        <reference name="product.info.additional">
+            <action method="unsetChild">
+                <name>product_tag_list</name>
+            </action>
+        </reference>
+        <reference name="catalog.product.related">
+            <action method="setTemplate"><tpl>catalog/product/list/related_slideshow.phtml</tpl></action>
+        </reference>
+        <reference name="product.info.options.wrapper.bottom">
+            <action method="unsetChild"><name>product.clone_prices</name></action>
+            <action method="unsetChild"><name>product.info.addto</name></action>
+        </reference>
+    </catalog_product_view>
+
+    <checkout_cart_index translate="label">
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <name>home</name>
+                <params>
+                    <label>Home</label>
+                    <title>Home</title>
+                    <link>/</link>
+                </params>
+            </action>
+            <action method="addCrumb">
+                <name>shopping-cart</name>
+                <params>
+                    <label>Shopping Cart</label>
+                    <title>Shopping Cart</title>
+                </params>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/shopping_cart.phtml</template></action>
+        </reference>
+    </checkout_cart_index>
+
+    <cms_page translate="label">
+        <update handle="MAP_popup" />
+
+        <reference name="content">
+            <action method="unsetChild">
+                <name>page_content_heading</name>
+            </action>
+            <action method="unsetChild">
+                <name>cms.wrapper</name>
+            </action>
+            <block type="core/template" name="page_blog_wrapper" template="cms/page.phtml">
+                <action method="insert">
+                    <name>page_content_heading</name>
+                </action>
+                <action method="insert">
+                    <name>cms_page</name>
+                </action>
+            </block>
+        </reference>
+    </cms_page>
+
+    <cms_page_view_after>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/page.phtml</template>
+            </action>
+        </reference>
+    </cms_page_view_after>
+
+    <cms_index_noroute_after>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/404.phtml</template>
+            </action>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <name>home</name>
+                <params>
+                    <label>Home</label>
+                    <title>Home</title>
+                    <link>/</link>
+                </params>
+            </action>
+            <action method="addCrumb">
+                <name>shopping-cart</name>
+                <params>
+                    <label>404</label>
+                    <title>404</title>
+                </params>
+            </action>
+        </reference>
+    </cms_index_noroute_after>
+
+    <cms_index_index_after>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/home.phtml</template>
+            </action>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <name>home</name>
+                <params>
+                    <label>Home</label>
+                </params>
+            </action>
+        </reference>
+    </cms_index_index_after>
+
+    <customer_account>
+        <reference name="left">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+    </customer_account>
+
+    <customer_account_index>
+        <reference name="left">
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+    </customer_account_index>
+
+</layout>

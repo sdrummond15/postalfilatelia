@@ -1,0 +1,74 @@
+#marker-start-L21vZHVsZS9EZXNpZ25lci9za2luL2FkbWluaHRtbC9kZWZhdWx0L2RlZmF1bHQvZGVzaWduZXIvY3NzL3N0eWxlLmNzcw.Lw {}
+.bd-theme-1 a {
+  color: #be8c04;
+}
+.bd-theme-1 a:hover {
+  color: #428bca;
+  text-decoration: underline;
+}
+.bd-theme-1 h6 a:hover {
+  text-decoration: none;
+}
+.bd-theme-1 h5 a:hover {
+  text-decoration: none;
+}
+.bd-theme-1 h4 a:hover {
+  text-decoration: none;
+}
+.bd-theme-1 h3 a:hover {
+  text-decoration: none;
+}
+.bd-theme-1 h2 {
+  text-decoration: none;
+  margin-top: 0;
+  font-weight: 200;
+}
+.bd-theme-1 h2 a:hover {
+  text-decoration: none;
+}
+.bd-theme-1 h1 {
+  font-weight: 200;
+}
+.bd-theme-1 h1 a:hover {
+  text-decoration: none;
+}
+.theme-list-title h3 {
+  display: inline-block;
+}
+.create-theme {
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 16px;
+}
+.theme-item {
+  display: inline-block;
+  padding: 5px;
+}
+.item-view,
+.item-actions {
+  display: table-cell;
+}
+.item-title.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.item-image {
+  width: 100px;
+  height: 100px;
+  background: #d9e5ee;
+  border: 1px #333333 dashed;
+}
+.item-image.editable {
+  background: #fcce77;
+  border-style: solid;
+}
+.item-actions {
+  padding: 10px;
+  vertical-align: top;
+}
+.item-actions a {
+  display: block;
+}
+#marker-end-L21vZHVsZS9EZXNpZ25lci9za2luL2FkbWluaHRtbC9kZWZhdWx0L2RlZmF1bHQvZGVzaWduZXIvY3NzL3N0eWxlLmNzcw.Lw {}
+

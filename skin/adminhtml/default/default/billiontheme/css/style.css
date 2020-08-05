@@ -1,0 +1,40 @@
+#marker-start-L2FwcC9tb2R1bGUvVGhlbWUvc2tpbi9hZG1pbmh0bWwvZGVmYXVsdC9kZWZhdWx0L2JpbGxpb250aGVtZS9jc3Mvc3R5bGUuY3Nz.Lw {}
+.theme-list-title h3 {
+  display: inline-block;
+}
+.create-theme {
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 16px;
+}
+.theme-item {
+  display: inline-block;
+  padding: 5px;
+}
+.item-view,
+.item-actions {
+  display: table-cell;
+}
+.item-title.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.item-image {
+  width: 200px;
+  height: 200px;
+  background: #d9e5ee;
+  border: 1px #333333 dashed;
+}
+.item-image.editable {
+  background: #fcce77;
+  border-style: solid;
+}
+.item-actions {
+  padding: 10px;
+  vertical-align: top;
+}
+.item-actions a {
+  display: block;
+}
+#marker-end-L2FwcC9tb2R1bGUvVGhlbWUvc2tpbi9hZG1pbmh0bWwvZGVmYXVsdC9kZWZhdWx0L2JpbGxpb250aGVtZS9jc3Mvc3R5bGUuY3Nz.Lw {}

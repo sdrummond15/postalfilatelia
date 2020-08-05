@@ -1,0 +1,141 @@
+<div class=" bd-productprice-3">
+    <span class="price">
+    <?php if (($_priceHtml = $this->getContent())): ?>
+        <?php
+        $_priceHtml = mb_convert_encoding($_priceHtml, 'HTML-ENTITIES', 'UTF-8');
+        $_priceHtml = str_replace("\r", '', $_priceHtml);
+        $_priceHtml = str_replace('&', 'ESCAPE_CHAR_AMP', $_priceHtml);
+        $_dom = new Zend_Dom_Query($_priceHtml);
+
+        $_priceBox = $_dom->query('.price-box');
+        $_doc = $_priceBox->getDocument();
+        $_xpath = new DOMXPath($_doc);
+
+        $_scripts =$_xpath->query('//script');
+        foreach ($_scripts as $_script) {
+            $_script->nodeValue = str_replace(
+                array('<', '>'),
+                array('ESCAPE_CHAR_LT', 'ESCAPE_CHAR_GT'),
+                $_script->nodeValue
+            );
+        }
+
+        /*
+            .old-price .price-label
+        */
+        $_oldPriceLabel = $_xpath->query(
+             '//*[@class = "old-price"]//*[@class = "price-label"]'
+        );
+
+        foreach ($_oldPriceLabel as $_label) {
+            // 
+            if ($_nodeClass = $_label->getAttributeNode('class')) {
+                $_nodeClass->value .= '  bd-label-11';
+            } else {
+                $_label->setAttribute('class', ' bd-label-11');
+            }
+            //
+        }
+
+        /*
+            .label,
+            .special-price .price-label,
+            .minimal-price .price-label,
+            .price-from .price-label,
+            .price-to .price-label
+        */
+        $_regularPriceLabel = $_xpath->query(
+            '//*[@class = "label label-default"] | '
+            . '//*[@class = "special-price" '
+            . 'or @class = "minimal-price" '
+            . 'or @class = "price-from" '
+            . 'or @class = "price-to"]//*[@class = "price-label"]'
+        );
+
+        foreach ($_regularPriceLabel as $_label) {
+            // 
+            if ($_nodeClass = $_label->getAttributeNode('class')) {
+                $_nodeClass->value .= '  bd-label-10';
+            } else {
+                $_label->setAttribute('class', ' bd-label-10');
+            }
+            //
+        }
+
+        /*
+            .price-excluding-tax,
+            .price-including-tax,
+            .regular-price,
+            .minimal-price-link,
+            .minimal-price,
+            .special-price,
+            .price-from,
+            .price-to
+         */
+        $_regularPrice = $_xpath->query(
+           '//*[@class = "price-excluding-tax" '
+           . 'or @class = "price-including-tax" '
+           . 'or @class = "minimal-price-link" '
+           . 'or @class = "minimal-price" '
+           . 'or @class = "regular-price" '
+           . 'or @class = "special-price" '
+           . 'or @class = "price-from" '
+           . 'or @class = "price-to"]'
+        );
+
+        foreach ($_regularPrice as $_price) {
+            if ($_nodeClass = $_price->getAttributeNode('class')) {
+                $_nodeClass->value .= '  bd-pricetext-10';
+            } else {
+                $_price->setAttribute('class', ' bd-pricetext-10');
+            }
+            $_priceAmount = $_xpath->query('.//*[@class = "price"]', $_price);
+            if ($_priceAmount->length) {
+                if ($_nodeClass = $_priceAmount->item(0)->getAttributeNode('class')) {
+                    $_nodeClass->value .= '  bd-container-29 bd-tagstyles';
+                }
+            }
+        }
+
+        // 
+
+        /*
+            .old-price
+        */
+        $_oldPrice = $_xpath->query(
+            '//*[@class = "old-price"]'
+        );
+
+        foreach ($_oldPrice as $_price) {
+            // 
+                if ($_nodeClass = $_price->getAttributeNode('class')) {
+                    $_nodeClass->value .= '  bd-pricetext-11';
+                } else {
+                    $_price->setAttribute('class', ' bd-pricetext-11');
+                }
+                $_priceAmount = $_xpath->query('.//*[@class = "price"]', $_price);
+                if ($_priceAmount->length) {
+                    if ($_nodeClass = $_priceAmount->item(0)->getAttributeNode('class')) {
+                        $_nodeClass->value .= '  bd-container-30 bd-tagstyles';
+                    }
+                }
+                // 
+            //
+        }
+
+        if (count($_priceBox)) {
+            $_html = '';
+            foreach ($_priceBox->current()->childNodes as $_boxNode) {
+                $_html .= $_doc->saveXml($_boxNode, LIBXML_NOEMPTYTAG);
+            }
+            $_html = str_replace(
+                array('ESCAPE_CHAR_AMP', 'ESCAPE_CHAR_LT', 'ESCAPE_CHAR_GT'),
+                array('&', '<', '>'),
+                $_html
+            );
+            echo $_html;
+        }
+        ?>
+    <?php endif ?>
+    </span>
+</div>

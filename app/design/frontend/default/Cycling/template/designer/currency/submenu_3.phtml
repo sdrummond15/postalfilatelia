@@ -1,0 +1,16 @@
+<?php if ($this->getContext()->getCurrencyCount()): ?>
+    <div class="bd-menu-8-popup">
+        
+        <ul class=" bd-menu-8">
+        <?php foreach ($this->getContext()->getCurrencies() as $_code => $_name): ?>
+            <li class=" bd-menuitem-8">
+    <a class="<?php if($_code == $this->getContext()->getCurrentCurrencyCode()): ?> active<?php endif ?>"
+       href="<?php echo $this->getContext()->getSwitchCurrencyUrl($_code) ?>">
+        <span><?php echo Mage::app()->getLocale()->currency($_code)->getSymbol() . ' ' . $_name ?></span>
+    </a>
+</li>
+        <?php endforeach ?>
+        </ul>
+        
+    </div>
+<?php endif ?>

@@ -1,0 +1,55 @@
+<div class=" bd-products">
+    <?php
+        $_helper    = $this->helper('catalog/output');
+        $_category  = $this->getCurrentCategory();
+    ?>
+    
+        <?php if ($_categoryProducts = Mage::app()->getLayout()->getBlock('category.products')): ?>
+    <?php
+        $_helper    = $this->helper('catalog/output');
+        $_category  = $_categoryProducts->getCurrentCategory();
+    ?>
+    <div class=" bd-container-46 bd-tagstyles page-title category-title">
+        <?php if($_categoryProducts->IsRssCatalogEnable() && $_categoryProducts->IsTopCategory()): ?>
+            <a href="<?php echo $_categoryProducts->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+        <?php endif; ?>
+        <h2><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h2>
+    </div>
+<?php endif ?>
+
+    
+
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+    <div class="product-list">
+        <?php if($this->isContentMode()): ?>
+            <?php echo $this->getCmsBlockHtml() ?>
+
+        <?php elseif($this->isMixedMode()): ?>
+            <?php echo $this->getCmsBlockHtml() ?>
+            <?php echo $this->getProductListHtml() ?>
+
+        <?php else: ?>
+            <?php echo $this->getProductListHtml() ?>
+        <?php endif; ?>
+    </div>
+    <script>
+        jQuery(function ($) {
+            var layoutTypes = [];
+            
+                layoutTypes.push({
+                    name:'bd-griditemgrid',
+                    iconUrl: '',
+                    iconDataId: '2382',
+                    iconClassNames: 'bd-icon-54'
+                });
+                layoutTypes.push({
+                    name:'bd-griditemlist',
+                    iconUrl: '',
+                    iconDataId: '2397',
+                    iconClassNames: 'bd-icon-55'
+                });
+            window.initProductsToolbar('.bd-products > .product-list', layoutTypes);
+        });
+    </script>
+</div>

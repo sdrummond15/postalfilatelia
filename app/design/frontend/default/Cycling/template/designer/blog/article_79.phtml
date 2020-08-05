@@ -1,0 +1,13 @@
+<article class=" bd-article-79 clearfix">
+    <?php if ($_header = $this->getHeader()): ?>
+    <h2 class=" bd-postheader-12">
+        <?php echo $_header ?>
+    </h2>
+<?php endif ?>
+	
+		<?php if ($_content = $this->getContent()): ?>
+    <div class=" bd-postcontent-13 bd-tagstyles">
+        <?php echo $_content ?>
+    </div>
+<?php endif ?>
+</article>

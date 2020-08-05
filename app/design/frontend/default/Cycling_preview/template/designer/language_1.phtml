@@ -1,0 +1,36 @@
+<?php $_helper = Mage::registry('templateHelper') ?>
+<?php if ($_helper && ($_language = Mage::app()->getLayout()->getBlock('store_language'))): ?>
+    <?php
+    $_options = array(
+        'showLabel' => false,
+        'showArrow' => true,
+        'textType' => 'noText'
+    );
+    ?>
+
+<div class="data-control-id-439 bd-language-2" data-responsive-menu="true" data-responsive-levels="">
+    <div class="data-control-id-141268 bd-horizontalmenu-5 clearfix">
+        <div class="bd-container-inner">
+            <?php $_submenu = $_helper->createTemplate('language/submenu', 2) ?>
+            <ul class="data-control-id-141269 bd-menu-9 nav nav-pills navbar-left">
+    <li class="data-control-id-141270 bd-menuitem-9">
+    <a href="#" class="dropdown-toggle">
+        <span>
+        <?php if ($_options['showLabel']): ?>Language: <?php endif ?>
+        <!--img src="<?php echo $this->getSkinUrl('images/flags/flag_' . Mage::app()->getStore()->getCode() . '.gif') ?>"-->
+        <?php if ($_options['textType'] === 'short' || $_options['textType'] === 'noText'): ?>
+            <?php echo strtoupper(substr(Mage::app()->getStore()->getName(), 0, 2)) ?>
+        <?php else: ?>
+            <?php echo Mage::app()->getStore()->getName() ?>
+        <?php endif ?>
+        </span>
+        <?php if ($_options['showArrow']): ?><span class="caret"></span><?php endif ?>
+    </a>
+    <?php echo $_submenu->setContext($_language)->toHtml() ?>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+
+<?php endif ?>

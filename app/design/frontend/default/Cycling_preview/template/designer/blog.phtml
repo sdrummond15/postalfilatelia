@@ -1,0 +1,37 @@
+<?php if (
+ !$this->getId()): ?>
+    <?php $_helper = Mage::registry('templateHelper') ?>
+    <div class="data-control-id-126516 bd-blog">
+        <div class="bd-container-inner">
+            
+                <?php if ($this->getHeader()): ?>
+<div class="data-control-id-126474 bd-container-74 bd-tagstyles">
+    <h2><?php echo $this->getHeader() ?></h2>
+</div>
+<?php endif ?>
+            <div class="data-control-id-126464 bd-grid-71">
+              <div class="container-fluid">
+                <div class="separated-grid row">
+                    <?php if ($_helper && ($_articles = $this->getArticles())): ?>
+                        <?php if (!isset($_articles[0])) $_articles = array($_articles) ?>
+                        <?php foreach ($_articles as $_article): ?>
+                            <?php
+                                $_articleTpl = $_helper->createTemplate('blog/article', '79');
+                                $_articleTpl->addData($_article);
+                            ?>
+                            
+
+                            <div class="separated-item-22 col-md-24 ">
+                            
+                                <div class="bd-griditem-22">
+                                    <?php echo $_articleTpl->toHtml(); ?>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif ?>

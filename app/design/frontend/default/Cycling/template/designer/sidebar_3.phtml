@@ -1,0 +1,73 @@
+<?php Mage::unregister('hasSidebarContent') ?>
+<?php Mage::register('hasSidebarContent', null) ?>
+<?php ob_start() ?>
+    <?php if ($_helper = Mage::registry('templateHelper')): ?>
+
+<?php
+    $_sidebarContent = trim($_helper->getPositionHtml(
+        'left',
+        array(
+            'class' => ' bd-block',
+            'headerClass' => ' bd-blockheader bd-tagstyles',
+            'contentClass' => ' bd-blockcontent bd-tagstyles'
+        )
+    ));
+    $_hasSidebarContent = Mage::registry('hasSidebarContent');
+    $_isPreview = $_helper->getThemlerHelper() && $_helper->getThemlerHelper()->isPreview();
+?>
+
+<?php if (!$_sidebarContent && $_isPreview): ?>
+    <!-- empty::begin -->
+<?php endif ?>
+
+<?php if ($_sidebarContent || $_isPreview): ?>
+    <div class=" bd-leftcolumn-1">
+        <?php echo $_sidebarContent ?>
+    </div>
+<?php endif ?>
+
+<?php if (!$_sidebarContent && $_isPreview): ?>
+    <!-- empty::end -->
+<?php endif ?>
+
+<?php
+    Mage::unregister('hasSidebarContent');
+    if (is_null($_hasSidebarContent)) {
+        $_hasSidebarContent = false;
+    }
+    $_hasSidebarContent |= !empty($_sidebarContent);
+    Mage::register('hasSidebarContent', $_hasSidebarContent);
+?>
+
+<?php endif ?>
+<?php
+    $_additionalClasses = '';
+    $_showColumn = true;
+
+    // 
+    $_hasSidebarContent = Mage::registry('hasSidebarContent');
+    if (!is_null($_hasSidebarContent)) {
+        $_showColumn &= $_hasSidebarContent;
+    }
+    //
+    $_areaContent = ob_get_clean();
+    $_showColumn &= 0 < strlen(trim(preg_replace('/<!-- empty::begin -->[\s\S]*?<!-- empty::end -->/', '', $_areaContent)));
+
+    $_helper = Mage::registry('templateHelper');
+    $_themlerHelper = $_helper ? $_helper->getThemlerHelper() : null;
+
+    if ($_themlerHelper && $_themlerHelper->isPreview() && !$_showColumn) {
+        $_showColumn = true;
+        $_additionalClasses = 'hidden bd-hidden-sidebar';
+    }
+?>
+<?php if ($_showColumn): ?>
+<aside class="bd-sidebararea-3-column  bd-flex-vertical bd-flex-fixed <?php echo $_additionalClasses ?>">
+    <div class="bd-sidebararea-3 bd-flex-wide">
+        
+        <?php echo $_areaContent ?>
+        
+    </div>
+</aside>
+<?php endif ?>
+<?php Mage::unregister('hasSidebarContent') ?>

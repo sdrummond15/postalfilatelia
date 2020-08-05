@@ -1,0 +1,103 @@
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_designerTheme = $_helper->getThemeName();
+    $_hmenuView = $_helper->getConfigValue("designer/settings/$_designerTheme/hmenu", '0');
+    $_startId = Mage::app()->getStore()->getRootCategoryId();
+    $_currentCategory = Mage::registry('current_category');
+
+    if (is_object($_currentCategory) && $_currentCategory->getId() !== $_startId && $_hmenuView === '1') {
+        $_startId = $_currentCategory->getId();
+    }
+
+    $_categories = Mage::getModel('catalog/category')->getCollection()
+        ->setStoreId(Mage::app()->getStore()->getId())
+        ->addAttributeToSelect('*')
+        ->addAttributeToFilter('is_active', '1')
+        ->addAttributeToFilter('include_in_menu', '1')
+        ->addAttributeToFilter('parent_id', array('eq' => $_startId))
+        ->addAttributeToSort('position')
+        ->load();
+
+    Mage::register('hmenu_levels', '');
+    Mage::register('hmenu_responsive_levels', '');
+    Mage::register('hmenu_submenu_id', '1');
+?>
+<?php if (count($_categories)): ?>
+    
+    <nav class=" bd-hmenu-1" data-responsive-menu="true" data-responsive-levels="">
+        
+            <div class=" bd-responsivemenu-1 collapse-button">
+    <div class="bd-container-inner">
+        <div class=" bd-menuitem-22">
+            <a  data-toggle="collapse"
+                data-target=".bd-hmenu-1 .collapse-button + .navbar-collapse"
+                href="#" onclick="return false;">
+                    <span>Menu</span>
+            </a>
+        </div>
+    </div>
+</div>
+            <div class="navbar-collapse collapse">
+            <div class=" bd-horizontalmenu-2 clearfix">
+                <div class="bd-container-inner">
+                    <ul class=" bd-menu-3 nav nav-pills navbar-left">
+    <?php
+        $_helper = Mage::registry('templateHelper');
+
+        $_showHome = $_helper ? $_helper->getConfigValue("designer/settings/$_designerTheme/navigation_home", '') : '';
+        $_homeText = $_helper ? $_helper->getConfigValue("designer/settings/$_designerTheme/navigation_home_text", 'Home') : '';
+
+        $_routeName = Mage::app()->getRequest()->getRouteName();
+        $_identifier = Mage::getSingleton('cms/page')->getIdentifier();
+        $_homeActive = $_routeName === 'cms' && $_identifier === Mage::getStoreConfig(Mage_Cms_Helper_Page::XML_PATH_HOME_PAGE);
+    ?>
+    <?php if ($_showHome): ?>
+        <li class=" bd-menuitem-3">
+            <a<?php if ($_homeActive): ?> class="active"<?php endif ?> href="<?php echo Mage::getBaseUrl() ?>">
+                <span><?php echo $this->__($_homeText ? $_homeText : 'Home') ?></span>
+            </a>
+        </li>
+    <?php endif ?>
+    <?php foreach ($_categories as $_category): ?>
+        <?php if (!$_category->getIsActive()) continue ?>
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+<li class=" bd-menuitem-3">
+    <a class="<?php if ($_helper->categoryIsActive($_category)): ?>active<?php endif ?>"
+        href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($_category) ?>">
+        <span><?php echo $_category->getName() ?></span>
+    </a>
+    <?php if (Mage::registry('hmenu_levels') !== 'one level' || Mage::registry('hmenu_responsive_levels') !== 'one level'): ?>
+        <?php
+        $_subcategories = Mage::getModel('catalog/category')->getCollection()
+            ->setStoreId(Mage::app()->getStore()->getId())
+            ->addAttributeToSelect('*')
+            ->addAttributeToFilter('is_active','1')
+            ->addAttributeToFilter('include_in_menu','1')
+            ->addAttributeToFilter('parent_id', array('eq' => $_category->getId()))
+            ->addAttributeToSort('position')
+            ->load();
+        ?>
+        <?php if ($_subcategories->count()): ?>
+            <?php echo $_helper->createTemplate('nav/subhmenu', Mage::registry('hmenu_submenu_id'))
+                               ->assign('subcategories', $_subcategories)
+                               ->toHtml() ?>
+        <?php endif ?>
+    <?php endif ?>
+</li>
+<?php endif ?>
+    <?php endforeach ?>
+</ul>
+                </div>
+            </div>
+        
+            </div>
+    </nav>
+    
+<?php endif ?>
+
+<?php
+    Mage::unregister('hmenu_levels');
+    Mage::unregister('hmenu_responsive_levels');
+    Mage::unregister('hmenu_submenu_id');
+?>
+<?php endif ?>

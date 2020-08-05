@@ -1,0 +1,161 @@
+<?php $_cartHelper = Mage::helper('checkout/cart') ?>
+<?php $_cartItemsCount = $_cartHelper->getSummaryCount() ?>
+<?php Mage::register('product_image_size', 56) ?>
+
+
+<div class=" bd-cartlink-1">
+    
+    <div class=" bd-horizontalmenu-3 clearfix">
+        <div class="bd-container-inner">
+            
+            <ul class=" bd-menu-5 nav nav-pills navbar-left">
+                <li class=" bd-menuitem-5">
+                    <a href="<?php echo $_cartHelper->getCartUrl() ?>">
+                        
+                            <span>
+                                
+                                    <?php echo $this->__('Cart') ?>
+                                
+                            </span>
+                        
+                            <?php if ($_block = Mage::app()->getLayout()->getBlock('cart.popup_link')): ?>
+    <div class=" bd-pricetext-7">
+    
+    <?php if (!$_block->canApplyMsrp()): ?>
+        <span class=" bd-container-9 bd-tagstyles">
+            <?php echo Mage::helper('checkout')->formatPrice($_block->getSubtotal()) ?>
+            <?php if ($_subtotalInclTax = $_block->getSubtotalInclTax()): ?>
+                (<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+            <?php endif; ?>
+        </span>
+    <?php endif; ?>
+    </div>
+<?php endif ?>
+                    </a>
+
+                    <?php if ($_cartItemsCount): ?>
+                    <div class="bd-menu-6-popup">
+                        
+                        <ul class=" bd-menu-6">
+                            <li class=" bd-menuitem-6">
+                                <div class=" bd-cartcontainer-2">
+    <?php
+    $_block = Mage::app()->getLayout()->getBlock('cart.popup_link');
+    $_items = $_block->getRecentItems();
+?>
+
+<div class=" bd-grid-12">
+    <div class="container-fluid">
+        <div class="separated-grid row">
+        <?php foreach ($_items as $_item): ?>
+            <?php
+                $_helper = $this->helper('catalog/output');
+                $_product = $_item->getProduct();
+                $_itemRenderer = $_block->getItemRenderer($_item->getProductType());
+                $_itemRenderer->setItem($_item);
+                $isVisibleProduct = $_product->isVisibleInSiteVisibility();
+            ?>
+            <div class="separated-item-3 col-md-24 list">
+    <div class=" bd-griditem-3"><div class=" bd-layoutcontainer-12">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class=" bd-layoutcolumn-col-25 
+ col-md-6">
+    <div class="bd-layoutcolumn-25"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/image', 3)->setProduct($_product)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-26 
+ col-md-14">
+    <div class="bd-layoutcolumn-26"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/title', 5)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/price', 2)->setContext($_itemRenderer)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-27 
+ col-md-4">
+    <div class="bd-layoutcolumn-27"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/edit-link', 2)->setContext($_itemRenderer)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/remove-link', 2)->setContext($_itemRenderer)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div></div>
+</div>
+        <?php endforeach ?>
+        </div>
+    </div>
+</div>
+	
+		<?php if ($_block = Mage::app()->getLayout()->getBlock('cart.popup_link')): ?>
+    <div class=" bd-pricetext-9">
+    <?php if ($_block = Mage::app()->getLayout()->getBlock('cart.popup_link')): ?>
+    <?php if ($_block->canApplyMsrp()): ?>
+        <span class=" bd-label-9"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+    <?php else: ?>
+        <span class=" bd-label-9"><?php echo $this->__('Cart Subtotal:') ?></span>
+    <?php endif ?>
+<?php endif ?>
+    <?php if (!$_block->canApplyMsrp()): ?>
+        <span class=" bd-container-11 bd-tagstyles">
+            <?php echo Mage::helper('checkout')->formatPrice($_block->getSubtotal()) ?>
+            <?php if ($_subtotalInclTax = $_block->getSubtotalInclTax()): ?>
+                (<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+            <?php endif; ?>
+        </span>
+    <?php endif; ?>
+    </div>
+<?php endif ?>
+	
+		<div class=" bd-layoutcontainer-13">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class=" bd-layoutcolumn-col-28 
+ col-md-6">
+    <div class="bd-layoutcolumn-28"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/view', 2)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-29 
+ col-md-18">
+    <div class="bd-layoutcolumn-29"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/checkout', 2)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <?php endif ?>
+
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    
+</div>
+
+<?php Mage::unregister('product_image_size') ?>

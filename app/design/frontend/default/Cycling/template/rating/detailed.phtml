@@ -1,0 +1,20 @@
+<?php if(!empty($collection) && $collection->getSize()): ?>
+    <table class="ratings-table">
+        <col width="1" />
+        <col />
+        <tbody>
+            <?php foreach ($collection as $_rating): ?>
+                <?php if($_rating->getSummary()): ?>
+                    <tr>
+                        <th><?php echo $this->__($this->escapeHtml($_rating->getRatingCode())) ?></th>
+                        <td>
+                            <?php if ($_helper = Mage::registry('templateHelper')): ?>
+                                <?php echo $_helper->createTemplate('rating-widget')->setPercent(ceil($_rating->getSummary()))->toHtml() ?>
+                            <?php endif ?>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>

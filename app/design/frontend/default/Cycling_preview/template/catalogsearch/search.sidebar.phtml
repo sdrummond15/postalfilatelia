@@ -1,0 +1,10 @@
+<div class="block block-search">
+    <div class="block-title">
+        <?php echo $this->__('Search') ?>
+    </div>
+    <div class="block-content shape-only">
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('search-widget-form', 2)->toHtml() ?>
+<?php endif ?>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+a:5:{i:0;s:240:"Error in file: "C:\xampp\htdocs\postalfilatelia\app\code\community\Cybage\Megamenu\sql\megamenu_setup\mysql4-upgrade-0.1.11.3-0.1.11.4.php" - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'megamenu_type.entity_id' in 'where clause'";i:1;s:1030:"#0 C:\xampp\htdocs\postalfilatelia\app\code\core\Mage\Core\Model\Resource\Setup.php(645): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 C:\xampp\htdocs\postalfilatelia\app\code\core\Mage\Core\Model\Resource\Setup.php(437): Mage_Core_Model_Resource_Setup->_modifyResourceDb('upgrade', '0.1.11.1', '0.1.11.5')
+#2 C:\xampp\htdocs\postalfilatelia\app\code\core\Mage\Core\Model\Resource\Setup.php(320): Mage_Core_Model_Resource_Setup->_upgradeResourceDb('0.1.11.1', '0.1.11.5')
+#3 C:\xampp\htdocs\postalfilatelia\app\code\core\Mage\Core\Model\Resource\Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 C:\xampp\htdocs\postalfilatelia\app\code\core\Mage\Core\Model\App.php(417): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 C:\xampp\htdocs\postalfilatelia\app\code\core\Mage\Core\Model\App.php(343): Mage_Core_Model_App->_initModules()
+#6 C:\xampp\htdocs\postalfilatelia\app\Mage.php(684): Mage_Core_Model_App->run(Array)
+#7 C:\xampp\htdocs\postalfilatelia\index.php(87): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:28:"/postalfilatelia/cpaneladmin";s:11:"script_name";s:26:"/postalfilatelia/index.php";s:4:"skin";s:7:"default";}

@@ -1,0 +1,3 @@
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('breadcrumbs', $this->getControlId())->assign('crumbs', $crumbs)->toHtml() ?>
+<?php endif ?>

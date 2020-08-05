@@ -1,0 +1,31 @@
+<?php if ($crumbs && is_array($crumbs)): ?>
+    <?php
+        $_helper = Mage::registry('templateHelper');
+        $_themlerHelper = $_helper ? $_helper->getThemlerHelper() : null;
+        if ($_themlerHelper && $_themlerHelper->isPreview()) {
+            $crumbs = $_themlerHelper->fixPreviewBreadcrumbs($crumbs);
+        }
+    ?>
+    <div class="container  bd-containereffect-13">
+    <div class=" bd-breadcrumbs-1">
+        <div class="bd-container-inner">
+            <ol class="breadcrumb">
+            <?php foreach ($crumbs as $_crumbName => $_crumbInfo): ?>
+                <li class="<?php
+                    echo $_crumbInfo['last'] ? 'active' : '' ?>"><?php if
+                    ($_crumbInfo['last']):
+                    ?><span class=" bd-breadcrumbstext-1"><span><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span></span><?php
+                    else: ?><div class=" bd-breadcrumbslink-1">
+<?php if ($_crumbInfo['link']): ?>
+    <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+<?php else: ?>
+    <a href="#"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+<?php endif ?>
+</div><?php endif ?>
+                </li>
+            <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+    </div>
+<?php endif ?>

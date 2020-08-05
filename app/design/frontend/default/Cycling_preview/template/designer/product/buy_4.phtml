@@ -1,0 +1,38 @@
+<?php
+    $_isOverview = $this->getIsOverview();
+    $_context = $this->getContext();
+    $_product = $this->getProduct();
+
+    $_buttonTitle = $this->__('Add to Cart')
+?>
+
+<?php if ($_product->isSaleable()): ?>
+    <?php if (!$_isOverview): // Other ?>
+            <?php
+                $_url = $_context->getAddToCartUrl($_product);
+                if (!$_url) {
+                    $_url = Mage::helper('checkout/cart')->getAddUrl($_product, array());
+                }
+            ?>
+            <?php $_clickAction = "setLocation('" . $_url . "')" ?>
+            <button title="<?php echo $_buttonTitle ?>"
+                    class="data-control-id-2740 bd-productbuy-4 bd-button"
+                    onclick="<?php echo $_clickAction ?>">
+                <span><span><?php echo $_buttonTitle ?></span></span>
+            </button>
+    <?php else: // Overview ?>
+            <?php $_clickAction = 'productAddToCartForm.submit(this)' ?>
+            <button title="<?php echo $_buttonTitle ?>"
+                    class="data-control-id-2740 bd-productbuy-4 bd-button"
+                    onclick="<?php echo $_clickAction ?>">
+                <span><span><?php echo $_buttonTitle ?></span></span>
+            </button>
+        <?php if ($_addto = Mage::app()->getLayout()->getBlock('product.info.addto')): ?>
+            <?php echo $_addto->toHtml() ?>
+        <?php endif ?>
+
+        <?php if ($_isOverview): ?>
+            <?php echo $_context->getChildHtml('extra_buttons') ?>
+        <?php endif ?>
+    <?php endif ?>
+<?php endif ?>

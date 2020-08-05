@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+    
+    <script>
+    var themeHasJQuery = !!window.jQuery;
+</script>
+<?php $_helper = Mage::registry('templateHelper') ?>
+<script src="<?php
+    echo $this->getSkinUrl('jquery.js') . '?version=' . ($_helper ? $_helper->getThemeVersion() : '')
+?>"></script>
+<script>
+    window.designer = {};
+    window._$ = jQuery.noConflict(themeHasJQuery);
+</script>
+    <?php
+    $_helper = Mage::registry('templateHelper');
+    $_preview = Mage::app()->getRequest()->getParam('preview');
+    $_hasBaseCss = file_exists(Mage::getDesign()->getSkinBaseDir() . DS . 'bootstrap.min.css');
+    $_bootstrapCss = $this->getSkinUrl($_preview || !$_hasBaseCss ? 'bootstrap.css' : 'bootstrap.min.css');
+    $_bootstrapJs = $this->getSkinUrl('bootstrap.min.js');
+    $_params = '?version=' . ($_helper ? $_helper->getThemeVersion() : '');
+?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<?php echo $_bootstrapCss . $_params ?>" />
+<script src="<?php echo $_bootstrapJs . $_params ?>"></script>
+<link class="data-control-id-9" href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,700,700italic|Fugaz+One:regular&subset=latin' rel='stylesheet' type='text/css'>
+<?php $_helper = Mage::registry('templateHelper') ?>
+<script src="<?php
+    echo $this->getSkinUrl('CloudZoom.js') . '?version=' . ($_helper ? $_helper->getThemeVersion() : '')
+?>" type="text/javascript"></script>
+    
+    
+    <?php echo $this->getChildHtml("head") ?>
+    <?php
+        $_helper = Mage::registry('templateHelper');
+
+        $_preview = Mage::app()->getRequest()->getParam('preview');
+        $_baseCss = file_exists(Mage::getDesign()->getSkinBaseDir() . DS . 'style.min.css') ? 'style.min.css' : 'style.css';
+
+        $_style = $this->getSkinUrl($_preview ? 'style.preview.php' : $_baseCss);
+        $_script = $this->getSkinUrl('script.js');
+
+        $_version = '?version=' . ($_helper ? $_helper->getThemeVersion() : '');
+        $_style .= $_version;
+        $_script .= $_version;
+
+        if ($_preview) {
+            $_style .= '&template=' . ($_helper ? $_helper->getThemeName() : '');
+        }
+    ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $_style ?>" />
+    <script src="<?php echo $_script ?>"></script>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('style.ie.css') ?>" />
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('script.ie.js') ?>"></script>
+    <![endif]-->
+</head>
+<body class="data-control-id-13 bootstrap bd-body-1 bd-pagebackground <?php echo $this->getBodyClass() ?>">
+    <?php echo $this->getChildHtml("after_body_start"); ?>
+    <header class="data-control-id-519732 bd-headerarea-1">
+        <div class="container data-control-id-519741 bd-containereffect-9"><div class="data-control-id-519740 bd-layoutbox-1 clearfix">
+    <div class="bd-container-inner">
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('language', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('currency', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/popup-link', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<img class="bd-imagestyles bd-imagelink-4   data-control-id-364788" src="<?php echo Mage::registry('templateHelper')->getSkinUrl('images/designer/0113bf25b0517afcaea511cf5921f1789765cc7c2c0d4a7ba056b3ef098fd82d.png') ?>">
+	
+		<div class="data-control-id-2444 bd-footerlinksmenu-1 hidden-sm hidden-xs">
+    <?php if ($links = Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('footer_links')->toHtml()): ?>
+    <div class="data-control-id-125393 bd-horizontalmenu-15 clearfix">
+        <?php $links = mb_convert_encoding($links, 'HTML-ENTITIES', 'UTF-8') ?>
+        <?php $_dom = new Zend_Dom_Query($links) ?>
+        <?php if (!$_dom->getDocumentErrors()): ?>
+            <div class="bd-container-inner">
+                <?php
+                    $_lists = $_dom->query('ul');
+                    $_menu = '';
+
+                    /** @var $_ul DomElement */
+                    foreach ($_lists as $_ul) {
+                        $_ul->setAttribute('class', 'data-control-id-125394 bd-menu-30 nav nav-pills nav-pills navbar-left');
+                        foreach ($_ul->getElementsByTagName('li') as $_li) {
+                            $_li->setAttribute('class', 'data-control-id-125395 bd-menuitem-33');
+                        }
+                        $_menu .= $_lists->getDocument()->saveXML($_ul, LIBXML_NOEMPTYTAG);
+                    }
+
+                    echo $_menu;
+                ?>
+            </div>
+        <?php endif ?>
+    </div>
+<?php endif ?>
+</div>
+    </div>
+</div>
+</div>
+	
+		<div class="data-control-id-519828 bd-layoutbox-2 clearfix">
+    <div class="bd-container-inner">
+        <div class="data-control-id-364541 bd-boxcontrol-1">
+    <div class="bd-container-inner">
+        <div class="bd-container-inner-wrapper">
+            <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php
+        echo $_helper->createTemplate('headline', '1')
+            ->setLogoAlt(Mage::app()->getLayout()->getBlock('header')->getLogoAlt())
+            ->toHtml()
+    ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('slogan', 1)
+        ->setWelcome(Mage::app()->getLayout()->getBlock('header')->getWelcome())
+        ->toHtml() ?>
+<?php endif ?>
+	
+		<img class="bd-imagestyles-6 bd-imagelink-3   data-control-id-364595" src="<?php echo Mage::registry('templateHelper')->getSkinUrl('images/designer/87b3104b1f41e32c5062e2797542fb27715a72bfdd3e4d8b9ddb64feebdc07ef.png') ?>">
+        </div>
+    </div>
+</div>
+	
+		<div class="data-control-id-365017 bd-customhtml-14 hidden-xs bd-tagstyles">
+    <div class="bd-container-inner bd-content-element">
+        <?php
+echo <<<'CUSTOM_CODE'
+<p><font size="4">Order delivery:</font></p>
+<p><font size="6" color="#ffffff">+1 (555) 123-4567</font></p>
+CUSTOM_CODE;
+?>
+    </div>
+</div>
+    </div>
+</div>
+	
+		<div class="data-control-id-519935 bd-layoutbox-3 clearfix">
+    <div class="bd-container-inner">
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('nav/hmenu', '1')->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('search-form', 3)->toHtml() ?>
+<?php endif ?>
+    </div>
+</div>
+</header>
+	
+		<div id="carousel-1" class="bd-slider bd-slider-1 bd-background-width data-control-id-834 carousel slide bd-carousel-left">
+    
+
+    
+
+    
+        
+    <div class="bd-sliderindicators-3 data-control-id-330824 bd-slider-indicators"><ol class="bd-indicators data-control-id-330823">
+        
+        <li><a class="
+ active" href="#" data-target="#carousel-1" data-slide-to="0"></a></li>
+        <li><a class="" href="#" data-target="#carousel-1" data-slide-to="1"></a></li>
+    </ol></div>
+
+    <div class="bd-slides carousel-inner">
+        <div class="data-control-id-820 bd-slide-1 bd-background-width bd-slide item"
+    
+    
+    >
+    <div class="bd-container-inner">
+        <div class="bd-container-inner-wrapper">
+            <img class="bd-imagestyles bd-imagelink-1 hidden-xs   data-control-id-749" src="<?php echo Mage::registry('templateHelper')->getSkinUrl('images/designer/dcb1df70f6f89a4494a0dba39733ac90.png') ?>">
+	
+		<div class="data-control-id-781 bd-customhtml-12 bd-tagstyles">
+    <div class="bd-container-inner bd-content-element">
+        <?php
+echo <<<'CUSTOM_CODE'
+<h1>Everyone shouLd<br>have a good bike</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elitorci lectus dapibus eu metus.</p>
+
+
+<h6>$799.99</h6>
+
+<p><a href="#" class="bd-button">Buy Now</a></p>
+CUSTOM_CODE;
+?>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+	
+		<div class="data-control-id-822 bd-slide-2 bd-background-width bd-slide item"
+    
+    
+    >
+    <div class="bd-container-inner">
+        <div class="bd-container-inner-wrapper">
+            <img class="bd-imagestyles bd-imagelink-2 hidden-xs   data-control-id-785" src="<?php echo Mage::registry('templateHelper')->getSkinUrl('images/designer/426eda300eb5026b9ba5bd3171f69cf6.png') ?>">
+	
+		<div class="data-control-id-817 bd-customhtml-13 bd-tagstyles">
+    <div class="bd-container-inner bd-content-element">
+        <?php
+echo <<<'CUSTOM_CODE'
+<h1>Family Cycling, Healthy Families</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elitorci lectus dapibus eu metus.</p>
+
+<h6>$599.99</h6>
+
+<p><a href="#" class="bd-button">Buy Now</a></p>
+CUSTOM_CODE;
+?>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    
+
+    
+
+    
+        <div class="bd-left-button">
+    <a class="data-control-id-831 bd-carousel-2" href="#">
+        <span></span>
+    </a>
+</div>
+
+<div class="bd-right-button">
+    <a class="data-control-id-831 bd-carousel-2" href="#">
+        <span></span>
+    </a>
+</div>
+
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        if ('undefined' !== typeof initSlider){
+            initSlider(
+                '.bd-slider-1',
+                'bd-left-button',
+                'bd-right-button',
+                '.bd-carousel-2',
+                '.bd-indicators',
+                3000,
+                "hover",
+                true,
+                true
+            );
+        }
+        /* ]]> */
+    </script>
+</div>
+	
+		<div class="container data-control-id-524722 bd-containereffect-3">
+<div class="data-control-id-547616 bd-stretchtobottom-6 bd-stretch-to-bottom" data-control-selector=".bd-contentlayout-1">
+<div class="bd-sheetstyles bd-contentlayout-1 data-control-id-524720">
+    <div class="bd-container-inner">
+
+        
+
+                    <div class="data-control-id-524718 bd-layoutitemsbox-1 bd-flex-wide">
+    <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('featured-slider', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('featured-slider', 2)->toHtml() ?>
+<?php endif ?>
+	
+		<div class="data-control-id-524721 bd-content-1">
+    <div class="bd-container-inner">
+        
+        <div id="ajax-loader"><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></div>
+        <?php if ($_globalMessages = Mage::app()->getLayout()->getBlock('global_messages')): ?>
+            <?php echo $_globalMessages->toHtml() ?>
+        <?php endif ?>
+        <?php echo Mage::app()->getLayout()->getBlock('content')->toHtml() ?>
+    </div>
+</div>
+</div>
+
+        
+
+    </div>
+</div></div>
+</div>
+	
+		<footer class="data-control-id-520272 bd-footerarea-1">
+        <div class="data-control-id-2448 bd-layoutbox-4 clearfix">
+    <div class="bd-container-inner">
+        <div class="data-control-id-2425 bd-sitemapmenu-1" data-responsive-menu="true">
+    
+    <div class="data-control-id-302926 bd-responsivemenu-18 collapse-button">
+    <div class="bd-container-inner">
+        <div class="data-control-id-468145 bd-menuitem-19">
+            <a  data-toggle="collapse"
+                data-target=".bd-sitemapmenu-1 .collapse-button + .navbar-collapse"
+                href="#" onclick="return false;">
+                    <span></span>
+            </a>
+        </div>
+    </div>
+</div>
+    <div class="navbar-collapse collapse">
+        <?php if (($links = Mage::app()->getLayout()->getBlock('footer_links')) && ($linksContent = $links->toHtml())): ?>
+    <div class="data-control-id-125315 bd-horizontalmenu-1 clearfix">
+        <?php $linksContent = mb_convert_encoding($linksContent, 'HTML-ENTITIES', 'UTF-8') ?>
+        <?php $_dom = new Zend_Dom_Query($linksContent) ?>
+        <?php if (!$_dom->getDocumentErrors()): ?>
+            <div class="bd-container-inner">
+                <?php
+                    $_lists = $_dom->query('ul');
+                    $_menu = '';
+
+                    /** @var $_ul DomElement */
+                    foreach ($_lists as $_ul) {
+                        $_ul->setAttribute('class', 'data-control-id-125316 bd-menu-1 nav nav-pills navbar-left');
+                        foreach ($_ul->getElementsByTagName('li') as $_li) {
+                            $_li->setAttribute('class', 'data-control-id-125317 bd-menuitem-1');
+                        }
+                        $_menu .= $_lists->getDocument()->saveXML($_ul, LIBXML_NOEMPTYTAG);
+                    }
+
+                    echo $_menu;
+                ?>
+            </div>
+        <?php endif ?>
+    </div>
+<?php endif ?>
+        
+    </div>
+</div>
+    </div>
+</div>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('pagefooter', 1)->toHtml() ?>
+<?php endif ?>
+</footer>
+	
+		<div data-smooth-scroll data-animation-time="250" class="data-control-id-303078 bd-smoothscroll-3"><a href="#" class="data-control-id-2459 bd-backtotop-1">
+    <span class="data-control-id-2458 bd-icon-58"></span>
+</a></div>
+    <?php if ($this->getChild('global_cookie_notice')): ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+    <?php endif ?>
+    <?php echo $this->getChildHtml("before_body_end"); ?>
+</body>
+</html>

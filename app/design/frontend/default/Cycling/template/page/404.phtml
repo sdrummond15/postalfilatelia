@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+    
+    <script>
+    var themeHasJQuery = !!window.jQuery;
+</script>
+<?php $_helper = Mage::registry('templateHelper') ?>
+<script src="<?php
+    echo $this->getSkinUrl('jquery.js') . '?version=' . ($_helper ? $_helper->getThemeVersion() : '')
+?>"></script>
+<script>
+    window.designer = {};
+    window._$ = jQuery.noConflict(themeHasJQuery);
+</script>
+    <?php
+    $_helper = Mage::registry('templateHelper');
+    $_preview = Mage::app()->getRequest()->getParam('preview');
+    $_hasBaseCss = file_exists(Mage::getDesign()->getSkinBaseDir() . DS . 'bootstrap.min.css');
+    $_bootstrapCss = $this->getSkinUrl($_preview || !$_hasBaseCss ? 'bootstrap.css' : 'bootstrap.min.css');
+    $_bootstrapJs = $this->getSkinUrl('bootstrap.min.js');
+    $_params = '?version=' . ($_helper ? $_helper->getThemeVersion() : '');
+?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<?php echo $_bootstrapCss . $_params ?>" />
+<script src="<?php echo $_bootstrapJs . $_params ?>"></script>
+<link class="" href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,700,700italic|Fugaz+One:regular&subset=latin' rel='stylesheet' type='text/css'>
+<?php $_helper = Mage::registry('templateHelper') ?>
+<script src="<?php
+    echo $this->getSkinUrl('CloudZoom.js') . '?version=' . ($_helper ? $_helper->getThemeVersion() : '')
+?>" type="text/javascript"></script>
+    
+    
+    <?php echo $this->getChildHtml("head") ?>
+    <?php
+        $_helper = Mage::registry('templateHelper');
+
+        $_preview = Mage::app()->getRequest()->getParam('preview');
+        $_baseCss = file_exists(Mage::getDesign()->getSkinBaseDir() . DS . 'style.min.css') ? 'style.min.css' : 'style.css';
+
+        $_style = $this->getSkinUrl($_preview ? 'style.preview.php' : $_baseCss);
+        $_script = $this->getSkinUrl('script.js');
+
+        $_version = '?version=' . ($_helper ? $_helper->getThemeVersion() : '');
+        $_style .= $_version;
+        $_script .= $_version;
+
+        if ($_preview) {
+            $_style .= '&template=' . ($_helper ? $_helper->getThemeName() : '');
+        }
+    ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $_style ?>" />
+    <script src="<?php echo $_script ?>"></script>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('style.ie.css') ?>" />
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('script.ie.js') ?>"></script>
+    <![endif]-->
+</head>
+<body class=" bootstrap bd-body-9 bd-pagebackground <?php echo $this->getBodyClass() ?>">
+    <?php echo $this->getChildHtml("after_body_start"); ?>
+    <header class=" bd-headerarea-1">
+        <div class="container  bd-containereffect-9"><div class=" bd-layoutbox-1 clearfix">
+    <div class="bd-container-inner">
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('language', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('currency', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/popup-link', 1)->toHtml() ?>
+<?php endif ?>
+	
+		<img class="bd-imagestyles bd-imagelink-4   " src="<?php echo Mage::registry('templateHelper')->getSkinUrl('images/designer/0113bf25b0517afcaea511cf5921f1789765cc7c2c0d4a7ba056b3ef098fd82d.png') ?>">
+	
+		<div class=" bd-footerlinksmenu-1 hidden-sm hidden-xs">
+    <?php if ($links = Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('footer_links')->toHtml()): ?>
+    <div class=" bd-horizontalmenu-15 clearfix">
+        <?php $links = mb_convert_encoding($links, 'HTML-ENTITIES', 'UTF-8') ?>
+        <?php $_dom = new Zend_Dom_Query($links) ?>
+        <?php if (!$_dom->getDocumentErrors()): ?>
+            <div class="bd-container-inner">
+                <?php
+                    $_lists = $_dom->query('ul');
+                    $_menu = '';
+
+                    /** @var $_ul DomElement */
+                    foreach ($_lists as $_ul) {
+                        $_ul->setAttribute('class', ' bd-menu-30 nav nav-pills nav-pills navbar-left');
+                        foreach ($_ul->getElementsByTagName('li') as $_li) {
+                            $_li->setAttribute('class', ' bd-menuitem-33');
+                        }
+                        $_menu .= $_lists->getDocument()->saveXML($_ul, LIBXML_NOEMPTYTAG);
+                    }
+
+                    echo $_menu;
+                ?>
+            </div>
+        <?php endif ?>
+    </div>
+<?php endif ?>
+</div>
+    </div>
+</div>
+</div>
+	
+		<div class=" bd-layoutbox-2 clearfix">
+    <div class="bd-container-inner">
+        <div class=" bd-boxcontrol-1">
+    <div class="bd-container-inner">
+        <div class="bd-container-inner-wrapper">
+            <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php
+        echo $_helper->createTemplate('headline', '1')
+            ->setLogoAlt(Mage::app()->getLayout()->getBlock('header')->getLogoAlt())
+            ->toHtml()
+    ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('slogan', 1)
+        ->setWelcome(Mage::app()->getLayout()->getBlock('header')->getWelcome())
+        ->toHtml() ?>
+<?php endif ?>
+	
+		<img class="bd-imagestyles-6 bd-imagelink-3   " src="<?php echo Mage::registry('templateHelper')->getSkinUrl('images/designer/87b3104b1f41e32c5062e2797542fb27715a72bfdd3e4d8b9ddb64feebdc07ef.png') ?>">
+        </div>
+    </div>
+</div>
+	
+		<div class=" bd-customhtml-14 hidden-xs bd-tagstyles">
+    <div class="bd-container-inner bd-content-element">
+        <?php
+echo <<<'CUSTOM_CODE'
+<p><font size="4">Order delivery:</font></p>
+<p><font size="6" color="#ffffff">+1 (555) 123-4567</font></p>
+CUSTOM_CODE;
+?>
+    </div>
+</div>
+    </div>
+</div>
+	
+		<div class=" bd-layoutbox-3 clearfix">
+    <div class="bd-container-inner">
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('nav/hmenu', '1')->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('search-form', 3)->toHtml() ?>
+<?php endif ?>
+    </div>
+</div>
+</header>
+	
+		<?php
+    if ($_crumbs = Mage::app()->getLayout()->getBlock('breadcrumbs')) {
+        echo $_crumbs->setControlId(1)->toHtml();
+    }
+?>
+	
+		<div class="container  bd-containereffect-2">
+<div class=" bd-stretchtobottom-2 bd-stretch-to-bottom" data-control-selector=".bd-contentlayout-2">
+<div class="bd-sheetstyles bd-contentlayout-2 ">
+    <div class="bd-container-inner">
+
+        
+
+                    <div class=" bd-layoutitemsbox-2 bd-flex-wide">
+    <div class=" bd-content-7">
+    <div class="bd-container-inner">
+        
+        <div id="ajax-loader"><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></div>
+        <?php if ($_globalMessages = Mage::app()->getLayout()->getBlock('global_messages')): ?>
+            <?php echo $_globalMessages->toHtml() ?>
+        <?php endif ?>
+        <?php echo Mage::app()->getLayout()->getBlock('content')->toHtml() ?>
+    </div>
+</div>
+</div>
+
+        
+
+    </div>
+</div></div>
+</div>
+	
+		<footer class=" bd-footerarea-1">
+        <div class=" bd-layoutbox-4 clearfix">
+    <div class="bd-container-inner">
+        <div class=" bd-sitemapmenu-1" data-responsive-menu="true">
+    
+    <div class=" bd-responsivemenu-18 collapse-button">
+    <div class="bd-container-inner">
+        <div class=" bd-menuitem-19">
+            <a  data-toggle="collapse"
+                data-target=".bd-sitemapmenu-1 .collapse-button + .navbar-collapse"
+                href="#" onclick="return false;">
+                    <span></span>
+            </a>
+        </div>
+    </div>
+</div>
+    <div class="navbar-collapse collapse">
+        <?php if (($links = Mage::app()->getLayout()->getBlock('footer_links')) && ($linksContent = $links->toHtml())): ?>
+    <div class=" bd-horizontalmenu-1 clearfix">
+        <?php $linksContent = mb_convert_encoding($linksContent, 'HTML-ENTITIES', 'UTF-8') ?>
+        <?php $_dom = new Zend_Dom_Query($linksContent) ?>
+        <?php if (!$_dom->getDocumentErrors()): ?>
+            <div class="bd-container-inner">
+                <?php
+                    $_lists = $_dom->query('ul');
+                    $_menu = '';
+
+                    /** @var $_ul DomElement */
+                    foreach ($_lists as $_ul) {
+                        $_ul->setAttribute('class', ' bd-menu-1 nav nav-pills navbar-left');
+                        foreach ($_ul->getElementsByTagName('li') as $_li) {
+                            $_li->setAttribute('class', ' bd-menuitem-1');
+                        }
+                        $_menu .= $_lists->getDocument()->saveXML($_ul, LIBXML_NOEMPTYTAG);
+                    }
+
+                    echo $_menu;
+                ?>
+            </div>
+        <?php endif ?>
+    </div>
+<?php endif ?>
+        
+    </div>
+</div>
+    </div>
+</div>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('pagefooter', 1)->toHtml() ?>
+<?php endif ?>
+</footer>
+    <?php if ($this->getChild('global_cookie_notice')): ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+    <?php endif ?>
+    <?php echo $this->getChildHtml("before_body_end"); ?>
+</body>
+</html>

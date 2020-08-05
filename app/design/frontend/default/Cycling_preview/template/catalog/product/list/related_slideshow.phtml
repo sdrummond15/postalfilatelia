@@ -1,0 +1,49 @@
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php
+        $settings = $_helper->getSliderSettings('Related');
+        if (!array_key_exists('header', $settings)) {
+            $settings['header'] = $this->__('Related Products');
+        }
+        echo $_helper->createSlider()
+            ->setItems($this->getItems())
+            ->setSettings($settings)
+            ->setShowRelatedCheckbox(true)
+            ->toHtml();
+    ?>
+<?php endif ?>
+<script type="text/javascript">
+//<![CDATA[
+$$('.related-checkbox').each(function(elem){
+    Event.observe(elem, 'click', addRelatedToProduct)
+});
+
+var relatedProductsCheckFlag = false;
+function selectAllRelated(txt) {
+    if (relatedProductsCheckFlag == false) {
+        $$('.related-checkbox').each(function(elem){
+            elem.checked = true;
+        });
+        relatedProductsCheckFlag = true;
+        txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+    } else {
+        $$('.related-checkbox').each(function(elem){
+            elem.checked = false;
+        });
+        relatedProductsCheckFlag = false;
+        txt.innerHTML="<?php echo $this->__('select all') ?>";
+    }
+    addRelatedToProduct();
+}
+
+function addRelatedToProduct(){
+    var checkboxes = $$('.related-checkbox');
+    var values = [];
+    for(var i=0;i<checkboxes.length;i++){
+        if(checkboxes[i].checked) values.push(checkboxes[i].value);
+    }
+    if($('related-products-field')){
+        $('related-products-field').value = values.join(',');
+    }
+}
+//]]>
+</script>

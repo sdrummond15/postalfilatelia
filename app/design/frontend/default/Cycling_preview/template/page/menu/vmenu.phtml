@@ -1,0 +1,88 @@
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php
+        $_designerTheme = $_helper->getThemeName();
+        $_vmenuView = $_helper->getConfigValue("designer/settings/$_designerTheme/vmenu", '0');
+    ?>
+
+    <?php if ($_vmenuView !== '2'): // 2 - None ?>
+
+    <?php
+        $_startId = Mage::app()->getStore()->getRootCategoryId();
+        $_currentCategory = Mage::registry('current_category');
+
+        if (is_object($_currentCategory) && $_currentCategory->getId() !== $_startId && $_vmenuView === '1') {
+            $_startId = $_currentCategory->getId();
+        }
+
+        $_categories = Mage::getModel('catalog/category')->getCollection()
+            ->setStoreId(Mage::app()->getStore()->getId())
+            ->addAttributeToSelect('*')
+            ->addAttributeToFilter('is_active','1')
+            ->addAttributeToFilter('include_in_menu','1')
+            ->addAttributeToFilter('parent_id', array('eq' => $_startId))
+            ->addAttributeToSort('position')
+            ->load();
+
+        Mage::register('vmenu_levels', '');
+        Mage::register('vmenu_responsive_levels', '');
+        Mage::register('vmenu_submenu_id', '1');
+    ?>
+
+    <?php if (count($_categories)): ?>
+        <div class="data-control-id-3165 bd-vmenu-1" data-responsive-menu="true" data-responsive-levels="">
+            <div class="data-control-id-97294 bd-block-6">
+                <div class="data-control-id-97295 bd-blockheader bd-tagstyles">
+                    <h4><?php echo $this->__('Category') ?></h4>
+                </div>
+                <div class="data-control-id-97296 bd-blockcontent bd-tagstyles shape-only">
+                    
+                    <div class="data-control-id-126090 bd-verticalmenu-3">
+                        <div class="bd-container-inner">
+                            <ul class="data-control-id-126091 bd-menu-31 nav nav-pills">
+    <?php foreach ($_categories as $_category): ?>
+        <?php if (!$_category->getIsActive()) continue ?>
+        <?php if ($_helper = Mage::registry('templateHelper')): ?>
+<li class="data-control-id-126092 bd-menuitem-31">
+    <a class="<?php if ($_helper->categoryIsActive($_category)): ?>active<?php endif ?>"
+       href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($_category) ?>">
+        <span><?php echo $_category->getName() ?></span>
+    </a>
+    <?php if (Mage::registry('vmenu_levels') !== 'one level' || Mage::registry('vmenu_responsive_levels') !== 'one level'): ?>
+        <?php
+        $_subcategories = Mage::getModel('catalog/category')->getCollection()
+            ->setStoreId(Mage::app()->getStore()->getId())
+            ->addAttributeToSelect('*')
+            ->addAttributeToFilter('is_active','1')
+            ->addAttributeToFilter('include_in_menu','1')
+            ->addAttributeToFilter('parent_id', array('eq' => $_category->getId()))
+            ->addAttributeToSort('position')
+            ->load();
+        ?>
+        <?php if ($_subcategories->count()): ?>
+            <?php
+                echo $_helper->createTemplate('nav/subvmenu', Mage::registry('vmenu_submenu_id'))
+                             ->assign('subcategories', $_subcategories)
+                             ->toHtml()
+            ?>
+        <?php endif ?>
+    <?php endif ?>
+</li>
+<?php endif ?>
+    <?php endforeach ?>
+</ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php
+        Mage::unregister('vmenu_levels');
+        Mage::unregister('vmenu_responsive_levels');
+        Mage::unregister('vmenu_submenu_id');
+    ?>
+
+    <?php endif ?>
+<?php endif ?>

@@ -1,0 +1,21 @@
+<?php
+    $_header = Mage::app()->getLayout()->getBlock('page_content_heading')->getContentHeading();
+    $_content = Mage::app()->getLayout()->getBlock('cms_page')->toHtml();
+    $_blogInfo = Mage::registry('contentRenderer');
+    if (!$_blogInfo) {
+        $_blogInfo = array('template' => 'blog', 'id' => null);
+    }
+    if ($_helper = Mage::registry('templateHelper')) {
+        $_blogTpl = $_helper->createTemplate($_blogInfo['template']);
+        $_blogTpl->setId($_blogInfo['id']);
+        $_blogTpl->setArticles(
+                 array(
+                     array(
+                         'header' => $_header,
+                         'content' => $_content
+                     )
+                 )
+        );
+        echo $_blogTpl->toHtml();
+    }
+?>

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Billiondigital_Theme>
+            <version>0.1.3</version>
+        </Billiondigital_Theme>
+    </modules>
+    <frontend>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <billiontheme_predispatch>
+                        <class>billiontheme/observer</class>
+                        <method>controller_action_predispatch</method>
+                    </billiontheme_predispatch>
+                </observers>
+            </controller_action_predispatch>
+            <cms_page_render>
+                <observers>
+                    <custom_page_template>
+                        <class>billiontheme/observer</class>
+                        <method>cms_page_render</method>
+                    </custom_page_template>
+                </observers>
+            </cms_page_render>
+            <controller_action_layout_render_before>
+                <observers>
+                    <theme_messages>
+                        <class>billiontheme/observer</class>
+                        <method>controller_action_layout_render_before</method>
+                    </theme_messages>
+                </observers>
+            </controller_action_layout_render_before>
+        </events>
+    </frontend>
+    <global>
+        <helpers>
+            <billiontheme>
+                <class>Billiondigital_Theme_Helper</class>
+            </billiontheme>
+            <designer>
+                <!-- temp workaround -->
+                <class>Billiondigital_Theme_Helper</class>
+            </designer>
+        </helpers>
+        <blocks>
+            <billiontheme>
+                <class>Billiondigital_Theme_Block</class>
+            </billiontheme>
+        </blocks>
+        <models>
+            <billiontheme>
+                <class>Billiondigital_Theme_Model</class>
+                <resourceModel>billiontheme_resource</resourceModel>
+            </billiontheme>
+        </models>
+    </global>
+    <admin>
+        <routers>
+            <billiontheme>
+                <use>admin</use>
+                <args>
+                    <module>Billiondigital_Theme</module>
+                    <frontName>billiontheme</frontName>
+                </args>
+            </billiontheme>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <billiontheme module="billiontheme">
+                <title>Billion Themes</title>
+                <sort_order>100</sort_order>
+                <action>billiontheme/adminhtml_list</action>
+            </billiontheme>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <billiontheme translate="title" module="billiontheme">
+                            <title>Billion theme</title>
+                            <sort_order>1000</sort_order>
+                            <children>
+                                <index translate="title">
+                                    <title>Billion Theme</title>
+                                </index>
+                            </children>
+                        </billiontheme>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <billiontheme>
+                    <file>billiontheme.xml</file>
+                </billiontheme>
+            </updates>
+        </layout>
+    </adminhtml>
+    <phpunit>
+        <suite>
+            <modules>
+                <Billiondigital_Theme />
+            </modules>
+        </suite>
+    </phpunit>
+</config>

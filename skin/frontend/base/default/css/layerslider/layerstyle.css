@@ -1,0 +1,345 @@
+#slide_parent {
+    max-width: 100%;
+    margin: 0 auto;
+    max-height: 100%;
+}
+
+#slider1_container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.slider1 div {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+}
+
+.slides {
+    cursor: move;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+
+}
+
+.slides-inner {
+    cursor: move;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+}
+
+.slides-inner a {
+    display: block;
+}
+
+.slides-inner img {
+    max-width: 100%;
+    width: 100%;
+}
+
+.slides-inner img.main-banner {
+    width: auto;
+    max-width: none;
+}
+
+a.captionOrange,
+A.captionOrange:active,
+A.captionOrange:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a.captionOrange:hover {
+    color: #eb5100;
+    text-decoration: underline;
+    background-color: #eeeeee;
+    background-color: rgba(238, 238, 238, 0.7);
+}
+
+.jssorb03 div,
+.jssorb03 div:hover,
+.jssorb03 .av {
+    background: url(../../images/layerslider/b18.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+}
+
+.jssorb03 div {
+    background-position: -5px -4px;
+}
+
+.jssorb03 div:hover, .jssorb03 .av:hover {
+    background-position: -35px -4px;
+}
+
+.jssorb03 .av {
+    background-position: -65px -4px;
+}
+
+.jssorb03 .dn,
+.jssorb03 .dn:hover {
+    background-position: -95px -4px;
+}
+
+.jssora20l,
+.jssora20r,
+.jssora20ldn,
+.jssora20rdn {
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    background: url(../../images/layerslider/a03.png) no-repeat;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -o-transition: all 0.4s ease-in-out 0s;
+}
+
+.jssora20l {
+    background-position: -3px -33px;
+    width: 55px;
+    height: 55px;
+    top: 123px;
+    left: 20px;
+}
+
+.jssora20r {
+    background-position: -63px -33px;
+    width: 55px;
+    height: 55px;
+    top: 123px;
+    right: 20px;
+}
+
+.jssora20l:hover {
+    background-position: -123px -33px;
+}
+
+.jssora20r:hover {
+    background-position: -183px -33px;
+}
+
+.jssora20ldn {
+    background-position: -243px -33px;
+}
+
+.jssora20rdn {
+    background-position: -303px -33px;
+}
+
+.jssorb03 {
+    position: absolute;
+    bottom: 20px;
+    left: 6px;
+}
+
+/**********************************
+	Caption Wise Css
+**********************************/
+.cap-tion {
+    position: absolute;
+    line-height: normal;
+    font-size: 100px;
+    color: #fff;
+    width: auto;
+}
+
+.cap-tion h1{
+    font-size: 60px;
+    font-family: 'opensansextrabold';
+}
+
+.cap-pos1 {
+    top: 100px;
+    left: 150px;
+}
+
+.cap-pos2 {
+    top: 150px;
+    left: 150px;
+}
+
+.cap-pos3 {
+    top: 200px;
+    left: 150px;
+}
+
+.cap-pos4 {
+    left: 150px;
+    top: 250px;
+}
+
+.cap-pos5 {
+    left: 150px;
+    top: 300px;
+}
+
+.cap-img1 {
+    left: auto;
+    top: 100px;
+    right: 400px;
+}
+
+.cap-img2 {
+    left: auto;
+    top: 100px;
+    right: 150px;
+}
+
+/******* Slide 1 *******/
+.slide-1 .cap-img1 {
+    right: 503px;
+    top: 130px;
+}
+
+.slide-1 .cap-img2 {
+    right: 639px;
+    top: 203px;
+}
+
+/*********** Override Position **********/
+/********* Slide2 *************/
+/***** Slide 2 *******/
+.slide-2 .cap-pos1 {
+    padding: 5px 15px;
+    left: 300px;
+    top: 100px;
+}
+
+.slide-2 .cap-pos2 {
+    padding: 5px 15px;
+    left: 300px;
+    top: 200px;
+}
+
+.slide-2 .cap-pos3 {
+    padding: 5px 15px;
+    left: 300px;
+    top: 300px;
+}
+
+.slide-2 .cap-pos4 {
+    left: auto;
+    right: 147px;
+    top: 20px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 18px;
+}
+
+.slide-2 .cap-pos5 {
+    right: 130px;
+    left: auto;
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+    padding: 7px 15px;
+    top: auto;
+    bottom: 5px;
+}
+
+.slide-2 .cap-img1 {
+    top: 150px;
+    right: 150px;
+}
+
+.slide-2 .cap-img2 {
+    top: 100px;
+    right: 350px;
+}
+
+/******* Slide 3 *******/
+.slide-3 .cap-img1 {
+    left: 1021px;
+    right: auto;
+    top: 30px;
+}
+
+.slide-3 .cap-img2 {
+    left: auto;
+    right: 495px;
+    top: 43px;
+}
+
+.slide-3 .cap-pos1,
+.slide-3 .cap-pos2,
+.slide-3 .cap-pos3,
+.slide-3 .cap-pos4,
+.slide-3 .cap-pos5 {
+    left: 200px;
+}
+
+.slide-3 .cap-pos1 {
+    padding: 10px;
+    transform: rotate(-22deg);
+    -webkit-transform: rotate(-22deg);
+    color: #F77E15;
+    left: 431px;
+    top: 201px;
+    font-size: 45px;
+}
+
+/***** Slide 4 *******/
+.slide-4 .cap-pos1 {
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+    padding: 5px 15px;
+    left: 150px;
+    top: 100px;
+}
+
+.slide-4 .cap-pos2 {
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+    padding: 5px 15px;
+    left: 180px;
+    top: 200px;
+}
+
+.slide-4 .cap-pos3 {
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+    padding: 5px 15px;
+    left: 210px;
+    top: 300px;
+}
+
+.slide-4 .cap-pos4 {
+    padding: 5px 15px;
+    left: 230px;
+    top: 400px;
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+}
+
+.slide-4 .cap-pos5 {
+    right: 130px;
+    left: auto;
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+    padding: 7px 15px;
+    top: auto;
+    bottom: 5px;
+}
+
+.slide-4 .cap-img1 {
+    right: 150px;
+    top: 170px;
+}
+
+.slide-4 .cap-img2 {
+    left: auto;
+    right: 430px;
+    top: 130px;
+}

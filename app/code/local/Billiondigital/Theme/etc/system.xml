@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <billiontheme translate="label" module="billiontheme">
+            <label>Billion Theme</label>
+            <sort_order>0</sort_order>
+        </billiontheme>
+    </tabs>
+</config>

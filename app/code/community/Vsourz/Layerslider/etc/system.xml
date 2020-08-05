@@ -1,0 +1,547 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<layerslider translate="label">
+			<label>Vsourz Layer Slider</label>
+			<sort_order>155</sort_order>
+		</layerslider>
+	</tabs>
+	<sections>
+		<layerslider translate="label">
+			<label>Layer Slider</label>
+			<tab>layerslider</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+					<label>General Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<loadjs translate="label">
+							<label>Load JQuery Library</label>
+							<comment><![CDATA[Select YES if JQuery library in not included in your Magento Project]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</loadjs>
+						<slidelinkurl translate="label">
+							<label>Enable Slide Link</label>
+							<comment><![CDATA[If YES it enables link on whole slide]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slidelinkurl>
+						<autoplay translate="label">
+							<label>Auto Play</label>
+							<comment><![CDATA[Enables and disables the autoplay option]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_truefalse</source_model>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</autoplay>
+						<autoplayinterval translate="label">
+                            <label>Autoplay Interval</label>
+							<comment><![CDATA[Time between two slides in milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<autoplay>true</autoplay>
+							</depends>
+                        </autoplayinterval>
+						<pauseonhover translate="label">
+                            <label>Pause on Hover</label>
+							<comment><![CDATA[Pause autoplay when hovered]]></comment>
+							<source_model>layerslider/source_pauseonhover</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<autoplay>true</autoplay>
+							</depends>
+                        </pauseonhover>
+						<arrowkeynav translate="label">
+							<label>Arrow Key Navigation</label>
+							<comment><![CDATA[Allows keyboard (arrow key) navigation]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_truefalse</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</arrowkeynav>
+						<slideduration translate="label">
+                            <label>Slide Duration</label>
+							<comment><![CDATA[Time between two slides in milliseconds when clicking on navigation arrow]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slideduration>
+						<mindragoffset translate="label">
+                            <label>Minimum Drag Offset</label>
+							<comment><![CDATA[Minimum drag offset to trigger slide. <b>Please don't leave it blank</b>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mindragoffset>
+						<playorientation translate="label">
+							<label>Play Orientation</label>
+							<comment><![CDATA[Orientation to play slide]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_playorientation</source_model>
+							<sort_order>45</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</playorientation>
+						<dragorientation translate="label">
+							<label>Drag Orientation</label>
+							<comment><![CDATA[Orientation to drag slide]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_dragorientation</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</dragorientation>
+						<arrownavigation translate="label">
+							<label>Arrow Navigation</label>
+							<comment><![CDATA[Options to specify and enable arrow navigator]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_chancetoshow</source_model>
+							<sort_order>55</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</arrownavigation>
+						<arrowautocenter translate="label">
+							<label>Arrow Autocenter</label>
+							<comment><![CDATA[Auto center arrows in parent container]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_autocenter</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</arrowautocenter>
+						<bulletnavigation translate="label">
+							<label>Bullet Navigation</label>
+							<comment><![CDATA[Options to specify and enable bullet navigator]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_chancetoshow</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</bulletnavigation>
+						<bulletautocenter translate="label">
+							<label>Bullet Autocenter</label>
+							<comment><![CDATA[Auto center arrows in parent container]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_autocenter</source_model>
+							<sort_order>65</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</bulletautocenter>
+						<bulletnumber translate="label">
+							<label>Show Bullet Number</label>
+							<comment><![CDATA[Shows Bullet Number if enabled]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</bulletnumber>
+					</fields>
+				</settings>
+				<slidesettings translate="label">
+					<label>Slide Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>20</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<slideeffects translate="label">
+							<label>Slide Effects</label>
+							<comment><![CDATA[Effects to be shown during slide show]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>layerslider/source_slideeffects</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slideeffects>
+						<slideheight translate="label">
+                            <label>Slide Height</label>
+							<comment><![CDATA[Height of Slide in px]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slideheight>
+						<slidewidth translate="label">
+                            <label>Slide Width</label>
+							<comment><![CDATA[Width of Slide in px]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slidewidth>
+						<transitionorder translate="label">
+                            <label>Transition Order</label>
+							<comment><![CDATA[Order in which the transition needs to be done]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_transitionorder</source_model>         <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transitionorder>
+					</fields>
+				</slidesettings>
+				<captionsettings translate="label">
+					<label>Caption Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<playinmode translate="label">
+                            <label>Play In Mode</label>
+							<comment><![CDATA[Mode of caption transition]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_playmode</source_model>         <sort_order>05</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </playinmode>
+						<playoutmode translate="label">
+                            <label>Play Out Mode</label>
+							<comment><![CDATA[Mode of caption transition]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_playmode</source_model>         <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </playoutmode>
+						<caption1 translate="label">
+                            <label>Enable Caption1</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption1>
+						<captionduration1 translate="label">
+                            <label>Caption1 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption1>1</caption1>
+							</depends>
+                        </captionduration1>
+						<captioneffect1 translate="label">
+                            <label>Caption Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption1>1</caption1>
+							</depends>
+                        </captioneffect1>
+						<caption2 translate="label">
+                            <label>Enable Caption2</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption2>
+						<captionduration2 translate="label">
+                            <label>Caption2 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption2>1</caption2>
+							</depends>
+                        </captionduration2>
+						<captioneffect2 translate="label">
+                            <label>Caption2 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption2>1</caption2>
+							</depends>
+                        </captioneffect2>
+						<caption3 translate="label">
+                            <label>Enable Caption3</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption3>
+						<captionduration3 translate="label">
+                            <label>Caption3 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption3>1</caption3>
+							</depends>
+                        </captionduration3>
+						<captioneffect3 translate="label">
+                            <label>Caption3 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption3>1</caption3>
+							</depends>
+                        </captioneffect3>
+						<caption4 translate="label">
+                            <label>Enable Caption4</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption4>
+						<captionduration4 translate="label">
+                            <label>Caption4 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption4>1</caption4>
+							</depends>
+                        </captionduration4>
+						<captioneffect4 translate="label">
+                            <label>Caption4 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption4>1</caption4>
+							</depends>
+                        </captioneffect4>
+						<caption5 translate="label">
+                            <label>Enable Caption5</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption5>
+						<captionduration5 translate="label">
+                            <label>Caption5 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>46</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption5>1</caption5>
+							</depends>
+                        </captionduration5>
+						<captioneffect5 translate="label">
+                            <label>Caption5 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>47</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption5>1</caption5>
+							</depends>
+                        </captioneffect5>
+						<caption5 translate="label">
+                            <label>Enable Caption5</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption5>
+						<captionduration5 translate="label">
+                            <label>Caption5 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>46</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption5>1</caption5>
+							</depends>
+                        </captionduration5>
+						<captioneffect5 translate="label">
+                            <label>Caption5 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>47</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<caption5>1</caption5>
+							</depends>
+                        </captioneffect5>
+						<captionimg1 translate="label">
+                            <label>Enable Caption Image1</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </captionimg1>
+						<captionimgduration1 translate="label">
+                            <label>CaptionImg1 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>51</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<captionimg1>1</captionimg1>
+							</depends>
+                        </captionimgduration1>
+						<captionimgeffect1 translate="label">
+                            <label>CaptionImg1 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<captionimg1>1</captionimg1>
+							</depends>
+                        </captionimgeffect1>
+						<captionimg2 translate="label">
+                            <label>Enable Caption Image2</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </captionimg2>
+						<captionimgduration2 translate="label">
+                            <label>CaptionImg2 Duration</label>
+							<comment><![CDATA[Caption Duration in Milliseconds]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>56</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<captionimg2>1</captionimg2>
+							</depends>
+                        </captionimgduration2>
+						<captionimgeffect2 translate="label">
+                            <label>CaptionImg2 Effect</label>
+							<comment><![CDATA[Caption Effect]]></comment>
+							<frontend_type>select</frontend_type>
+                            <source_model>layerslider/source_captioneffect</source_model>         <sort_order>57</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends>
+								<captionimg2>1</captionimg2>
+							</depends>
+                        </captionimgeffect2>
+					</fields>
+				</captionsettings>
+				<files>
+                    <label>Slider CSS</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <comment><![CDATA[<strong>IMPORTANT!</strong><p>To write to your layerstyle.css, you must set permissions to at least 664.</p>]]></comment>
+                    <fields>
+                        <css translate="label">
+                            <label>layerstyle.css</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <comment>All slider CSS should be inputted over here</comment>
+                        </css>
+						<packagename translate="label">
+                            <label>Package and Theme name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <comment><![CDATA[Please enter the package name and theme name of your website so css file can be located <strong>for eg: rwd/default</strong>]]></comment>
+                        </packagename>
+                    </fields>
+                </files>
+			</groups>
+		</layerslider>
+	</sections>
+</config>

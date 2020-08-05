@@ -1,0 +1,8 @@
+<div class=" bd-checkoutsteps-1" id="checkout-progress-state">
+    <?php foreach ($this->getSteps() as $_step): ?>
+        <a class=" bd-checkoutstep-1 <?php if($_step->getIsActive()): ?>active<?php endif ?>">
+            <span class=" bd-checkoutstepnumber-1"></span>
+            <span><?php echo $_step->getLabel() ?></span>
+        </a>
+    <?php endforeach ?>
+</div>

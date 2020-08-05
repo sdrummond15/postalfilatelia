@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <paths>
+        <app_base>/app/design/frontend/default</app_base>
+        <skin_base>/skin/frontend/default</skin_base>
+        <theme>
+            <cache>/app/design/frontend/default/{theme}/designer/cache.json</cache>
+            <hashes>/app/design/frontend/default/{theme}/designer/hashes.json</hashes>
+            <project>/app/design/frontend/default/{theme}/designer/project.json</project>
+            <version>/app/design/frontend/default/{theme}/designer/version</version>
+            <manifest>/app/design/frontend/default/{theme}/designer/{version}.manifest</manifest>
+            <diff>/app/design/frontend/default/{theme}/designer/diff.json</diff>
+            <previewCode>/app/design/frontend/default/{theme}/designer/previewCode.json</previewCode>
+            <app>/app/design/frontend/default/{theme}</app>
+            <skin>/skin/frontend/default/{theme}</skin>
+            <thumbnails>/skin/frontend/default/{theme}/images</thumbnails>
+            <dirname>/{theme}</dirname>
+        </theme>
+        <preview>
+            <dirname>/{theme}_preview</dirname>
+        </preview>
+        <export>
+            <temp>/var/temp_export</temp>
+            <fso>/var/temp_export/theme_fso</fso>
+            <result>/var/temp_export/result</result>
+            <upload>/var/temp_export/upload</upload>
+            <images>/var/designer/images</images>
+            <manifest>/var/designer/manifest/{version}.manifest</manifest>
+        </export>
+    </paths>
+</config>

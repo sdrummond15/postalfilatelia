@@ -1,0 +1,19 @@
+<div class="data-control-id-2899 bd-productreviews-1">
+    <?php if ($_header = $this->getHeader()): ?>
+    <div class="data-control-id-2841 bd-container-38 bd-tagstyles">
+        <h2><?php echo $_header ?></h2>
+    </div>
+<?php endif ?>
+    <?php if ($this->getReviews() && ($_helper = Mage::registry('templateHelper'))): ?>
+    <?php
+        foreach ($this->getReviews() as $_review) {
+            $_reviewTpl = $_helper->createTemplate('product/reviews/review', 1);
+            $_reviewTpl->addData($_review);
+            echo $_reviewTpl->toHtml();
+        }
+    ?>
+    <?php else: ?>
+        <p class="no-rating"><?php echo $this->__('Be the first to review this product') ?></p>
+    <?php endif ?>
+    <?php echo Mage::app()->getLayout()->getBlock('product.review.form')->setFormId(1)->toHtml() ?>
+</div>

@@ -1,0 +1,7 @@
+<?php if ($_product = $this->getProduct()): ?>
+    <?php if (!$_product->isSaleable()): ?>
+        <div class="bd-productoutofstockicon data-control-id-2256 bd-productoutofstock-2">
+            <?php echo $this->__('Out of stock') ?>
+        </div>
+    <?php endif ?>
+<?php endif ?>

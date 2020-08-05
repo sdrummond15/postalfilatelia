@@ -1,0 +1,35 @@
+<?php
+if (is_null(Mage::registry('reviewsId'))) {
+    Mage::register('reviewsId', 1);
+}
+?>
+<div class="data-control-id-2809 bd-tabinformationcontrol-2 tabbable" data-responsive="true">
+    <?php if ($_tabsBlock = Mage::app()->getLayout()->getBlock('product.info.tabs')): ?>
+        <?php if (($_tabs = $_tabsBlock->getTabs()) && count($_tabs)): ?>
+            <ul class="data-control-id-2776 bd-menu-14 clearfix nav nav-tabs navbar-left">
+        <?php foreach ($_tabs as $_index => $_tab): ?>
+        <?php if (Mage::app()->getLayout()->getBlock($_tab['alias'])): ?>
+            <?php $_itemClass = !$_index ? ' active first' : (($_index === count($_tabs) - 1) ? ' last' : '')?>
+            <li class="data-control-id-2768 bd-menuitem-14 <?php echo $_itemClass ?>">
+                <a href="#product_tabs_<?php echo $_tab['alias'] ?>" data-toggle="tab"><span><?php echo $_tab['title']?></span></a>
+            </li>
+        <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+            <div class="data-control-id-2808 bd-container-37 bd-tagstyles tab-content">
+        <?php foreach ($_tabs as $_index => $_tab): ?>
+            <?php if ($_tabBlock = Mage::app()->getLayout()->getBlock($_tab['alias'])): ?>
+                <?php $_tabClass = !$_index ? ' active first' : (($_index === count($_tabs) - 1) ? ' last' : '')?>
+                <div class="tab-pane<?php echo $_tabClass ?>" id="product_tabs_<?php echo $_tab['alias'] ?>">
+                    <?php echo $_tabBlock->toHtml() ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+            <div class="data-control-id-468377 bd-accordion accordion">
+    <div class="data-control-id-470412 bd-menuitem-24 accordion-item"></div>
+    <div class="data-control-id-470422 bd-container-27 bd-tagstyles accordion-content"></div>
+</div>
+        <?php endif ?>
+    <?php endif ?>
+</div>

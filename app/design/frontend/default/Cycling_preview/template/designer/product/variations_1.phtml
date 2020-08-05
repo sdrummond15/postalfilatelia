@@ -1,0 +1,38 @@
+<?php if (($_block = $this->getContext()) && ($_product = $this->getProduct())): ?>
+<div class="data-control-id-2735 bd-productvariations-1">
+    <form action="<?php echo $_block->getSubmitUrl($_product) ?>"
+          method="post"
+          id="product_addtocart_form" enctype="multipart/form-data">
+        <?php if ($_formkey = Mage::app()->getLayout()->getBlock('formkey')): ?>
+            <?php echo $_formkey->toHtml() ?>
+        <?php endif ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>">
+            <input type="hidden" name="related_product" id="related-products-field" value="">
+        </div>
+        <?php echo $_block->getChildHtml('alert_urls') ?>
+        <?php echo $_block->getChildHtml('product_type_data') ?>
+        <?php echo $_block->getTierPriceHtml() ?>
+        <?php echo $_block->getChildHtml('extrahint') ?>
+
+        <?php if ($_product->isSaleable() && $_block->hasOptions()):?>
+            <?php echo $_block->getChildChildHtml('container1', '', true, true) ?>
+            <?php echo $_block->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+
+        <?php if(!$_product->isGrouped() && $_product->isSaleable()): ?>
+            <div class="add-to-cart">
+                <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                <input type="text"
+                       name="qty"
+                       id="qty"
+                       maxlength="12"
+                       value="<?php echo Mage::app()->getLayout()->getBlock('product.info.addtocart')->getProductDefaultQty() * 1 ?>"
+                       title="<?php echo $this->__('Qty') ?>"
+                       class="data-control-id-2734 bd-bootstrapinput form-control input-text qty" />
+            </div>
+        <?php endif ?>
+
+    </form>
+</div>
+<?php endif ?>

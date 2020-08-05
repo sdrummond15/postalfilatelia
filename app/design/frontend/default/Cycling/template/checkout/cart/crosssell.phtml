@@ -1,0 +1,12 @@
+<?php if ($this->getItemCount() && ($_helper = Mage::registry('templateHelper'))): ?>
+    <?php
+        $settings = $_helper->getSliderSettings('Crosssell');
+        if (!array_key_exists('header', $settings)) {
+            $settings['header'] = $this->__('Based on your selection, you may be interested in the following items:');
+        }
+        echo $_helper->createSlider()
+            ->setItems($this->getItems())
+            ->setSettings($settings)
+            ->toHtml()
+    ?>
+<?php endif ?>

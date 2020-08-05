@@ -1,0 +1,42 @@
+<?php
+    $_adminHelper = Mage::helper('adminhtml');
+    $_themeName = $this->getTheme();
+    $_project = Billiondigital_Themler_Model_Export_Project::open($_themeName);
+    $_url = Mage::helper('billionthemler/url');
+    $_formKey = Mage::getSingleton('core/session')->getFormKey();
+?>
+window.themeDesigner = {
+    settings: {
+        cmsVersion: '<?php echo json_encode(array('magento' => Mage::getVersion())) ?>',
+        maxRequestSize: <?php echo Mage::helper('billionthemler/utility')->getMaxRequestSize() ?>,
+        invalidFormKeyMessage: '<?php echo $_adminHelper->__('Invalid Form Key. Please refresh the page.') ?>',
+        invalidSecretKeyMessage: '<?php echo $_adminHelper->__('Invalid Secret Key. Please refresh the page.') ?>'
+    },
+    adminUrl: '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) .
+                'index.php/' . Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName') ?>',
+    previewUrl: '<?php echo $_url->getPreviewUrl('cms/index/index') ?>',
+    themlerUrl: '<?php echo $_url->getDesignerUrl('billionthemler/adminhtml_theme/index') ?>',
+    ajaxUrl: '<?php echo $_url->getDesignerAjaxUrl('billionthemler/adminhtml_theme/index') ?>',
+    uploadUrl: '<?php echo $_url->getDesignerAjaxUrl('billionthemler/adminhtml_theme/uploadImage', array('form_key' => $_formKey)) ?>',
+    uploadThemeUrl: '<?php echo $_url->getDesignerAjaxUrl('billionthemler/adminhtml_theme/uploadTheme', array('form_key' => $_formKey)) ?>',
+    zipToFsoUrl: '<?php echo $_url->getDesignerAjaxUrl('billionthemler/adminhtml_theme/zipToFso', array('form_key' => $_formKey)) ?>',
+    formKey: '<?php echo Mage::getSingleton('core/session')->getFormKey() ?>',
+    templates: {
+        'home': '<?php echo $_url->getPreviewUrl('cms/index/index') ?>',
+        'default': '<?php echo $_url->getPreviewUrl('billionthemler/template/default') ?>',
+        'pageTemplate': '<?php echo $_url->getPagePreviewUrl() ?>',
+        'products': '<?php echo $_url->getCategoryPreviewUrl() ?>',
+        'productOverview': '<?php echo $_url->getProductPreviewUrl() ?>',
+        'shoppingCartTemplate': '<?php echo $_url->getPreviewUrl('checkout/cart/index') ?>',
+        'template404' : '<?php echo $_url->getPreviewUrl('no/route/path') ?>'
+    },
+    themes: <?php echo json_encode(Mage::helper('billionthemler')->getThemesInfo()) ?>,
+    theme: {
+        projectData: <?php echo $_project->serializeData() ?>,
+        version: '<?php echo '1.0.0.0' ?>',
+        cache: <?php echo Mage::helper('billionthemler/export')->getCache($_themeName) ?>,
+        hashes: <?php echo Mage::helper('billionthemler/export')->getHashes($_themeName) ?>,
+        active: <?php echo Mage::helper('billioncore')->isActive($_themeName) ? 'true' : 'false' ?>,
+        name: '<?php echo $_themeName ?>'
+    }
+};

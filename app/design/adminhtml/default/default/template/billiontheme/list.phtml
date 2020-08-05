@@ -1,0 +1,35 @@
+<?php
+    $_themeList = Mage::getSingleton('billiontheme/themeList')->getThemeList();
+?>
+<div class="theme-list">
+    <?php if (!$_themeList->count()): ?>
+        <?php
+            echo $this->getLayout()->createBlock('adminhtml/template')->setTemplate('billioncore/permission-denied.phtml')
+                ->setHeader('Empty theme list.')
+                ->toHtml()
+        ?>
+    <?php endif ?>
+    <?php foreach($_themeList as $_theme): ?>
+        <?php $_isEditable = $_theme->getHasThemler() && $_theme->getHasProject(); ?>
+        <div class="theme-item">
+            <div class="item-title <?php if ($_theme->isActive()) echo 'active' ?>">
+                <?php echo $_theme->getName() ?>
+            </div>
+            <div class="item-view">
+                <div class="item-image <?php echo $_isEditable ? 'editable' : '' ?>">
+                    <img src="<?php echo $_theme->getThumbnailUrl() ?>" alt="">
+                </div>
+            </div>
+            <div class="item-actions">
+                <a href="<?php echo $_theme->getSettingsUrl() ?>" ?>Settings</a>
+            <?php if ($_isEditable): ?>
+                <a href="<?php echo $_theme->getEditUrl() ?>">Edit</a>
+                <a target="_blank" href="<?php echo $_theme->getPreviewUrl() ?>">Preview</a>
+            <?php endif ?>
+            <?php if ($_theme->getHasThemler()): ?>
+                <a href="<?php echo $_theme->getPublishUrl() ?>">Publish</a>
+            <?php endif ?>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>

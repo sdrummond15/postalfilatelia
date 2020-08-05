@@ -1,0 +1,37 @@
+<?php $_reviewsHeader = $this->__('Customer Reviews') ?>
+<?php $_items = $this->getReviewsCollection()->getItems() ?>
+
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php if (is_null(Mage::registry('reviewsId'))): ?>
+        <?php echo $_helper->getMessagesHelper()->error('Invalid reviews id.') ?>
+    <?php else: ?>
+        <?php
+        $_reviews = array();
+        $_reviewsTpl = $_helper->createTemplate('product/reviews', Mage::registry('reviewsId'));
+        $_reviewsTpl->setHeader($_reviewsHeader);
+        ?>
+
+        <?php foreach ($_items as $_review): ?>
+
+            <?php
+            $_buffer = $_helper->getCaptureModel();
+            $_buffer->setAuthor($this->htmlEscape($_review->getNickname()));
+            $_buffer->setText(nl2br($this->htmlEscape($_review->getDetail())));
+            $_buffer->setRatingVotes($_review->getRatingVotes());
+            $_buffer->setDate($this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long'))
+            ?>
+
+            <?php if ($_buffer->capture('header')): ?>
+                <a href="<?php echo Mage::getUrl('review/product/view', array('id' => $_review->getId()))?>">
+                    <?php echo $this->htmlEscape($_review->getTitle()) ?>
+                </a>
+            <?php endif ?>
+
+            <?php $_reviews[] = $_buffer->complete() ?>
+
+        <?php endforeach ?>
+
+        <?php echo $_reviewsTpl->setReviews($_reviews)->toHtml() ?>
+
+    <?php endif ?>
+<?php endif ?>

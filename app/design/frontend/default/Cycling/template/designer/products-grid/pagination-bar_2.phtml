@@ -1,0 +1,8 @@
+<?php if (($_block = $this->getContext())
+        && ($_pagerBlock = $_block->getChild('product_list_toolbar_pager'))
+        && $_block->getCollection()->setPageSize($_block->getLimit())->getLastPageNumber() > 1): ?>
+    <div class=" bd-productsgridpagination-2">
+        <?php $_pagerBlock->setTemplate('designer/products-grid/pager_2.phtml') ?>
+        <?php echo $_block->getPagerHtml() ?>
+    </div>
+<?php endif ?>

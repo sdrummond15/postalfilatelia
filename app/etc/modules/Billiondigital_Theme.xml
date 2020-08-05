@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Billiondigital_Theme>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Billiondigital_Core/>
+            </depends>
+        </Billiondigital_Theme>
+    </modules>
+</config>

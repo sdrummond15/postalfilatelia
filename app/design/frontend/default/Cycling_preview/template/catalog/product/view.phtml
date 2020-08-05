@@ -1,0 +1,206 @@
+<?php $_helper = $this->helper('catalog/output') ?>
+<?php $_product = $this->getProduct() ?>
+<?php $_addToCartAction = 'productAddToCartForm.submit(this)' ?>
+<?php $_isOverview = true; ?>
+
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<div class="data-control-id-2902 bd-productoverview product-view">
+    <div class="data-control-id-2746 bd-layoutcontainer-28">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class="data-control-id-2742 bd-layoutcolumn-col-55 
+ col-md-12">
+    <div class="bd-layoutcolumn-55"><div class="bd-vertical-align-wrapper"><?php if ($_overviewImage = $this->getChild('image')): ?>
+    <?php
+        $_product = $_overviewImage->getProduct();
+        $_helper = $this->helper('catalog/output');
+    ?>
+    <div class="data-control-id-2638 bd-productimage-6">
+        <div class="zoom-container">
+            <a class="zoom" rel="thumbnails" href="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>">
+                <img class="data-control-id-2637 bd-imagestyles-19" src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" alt="<?php echo $this->htmlEscape($_overviewImage->getImageLabel()) ?>" title="<?php echo $this->htmlEscape($_overviewImage->getImageLabel()) ?>">
+            </a>
+        </div>
+    </div>
+<?php endif ?>
+	
+		<?php
+    $_thumbnails = $this->getChild('image_thumbnails');
+    $_product = $_thumbnails->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $_images = $_thumbnails->getGalleryImages();
+    $_imagesCount = count($_images);
+    $_slideItems = intval('4');
+?>
+<?php if ($_imagesCount > 0 && $_slideItems > 0): ?>
+    <?php
+        $_innerStyle = '';
+        $_itemStyle = '';
+        // 
+            if ($_imagesCount < $_slideItems && $_slideItems !== 0) {
+                $_innerStyle = 'style="width: ' . floor(100 / $_slideItems) * $_imagesCount . '%;margin: 0 auto;"';
+                $_itemStyle = 'style="width:' . floor(100 / $_imagesCount) . '%"';
+            }
+        //
+    ?>
+    <div class="data-control-id-2652 bd-imagethumbnails-1 carousel slide adjust-slides">
+        
+        <div class="carousel-inner" <?php echo $_innerStyle ?>>
+            <?php $_i = 0 ?>
+            <?php foreach ($_images as $_image): ?>
+
+                <?php if ($_i % $_slideItems === 0): ?>
+                    <div class="item <?php if ($_i === 0): ?>active<?php endif ?>">
+                <?php endif ?>
+
+                <a class="data-control-id-2643 bd-productimage-7"
+                    <?php echo $_itemStyle ?>
+                   href="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile()) ?>"
+                   rel="smallImage:'<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile()) ?>'">
+                    <img class="data-control-id-2642 bd-imagestyles"
+                         src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile()) ?>"
+                         alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
+                </a>
+
+                <?php if (($_i + 1) % $_slideItems === 0 || ($_i + 1) === $_imagesCount): ?>
+                    </div>
+                <?php endif ?>
+
+                <?php $_i++ ?>
+            <?php endforeach ?>
+        </div>
+        <?php if ($_imagesCount > $_slideItems): ?>
+            
+                <div class="bd-left-button">
+    <a class="data-control-id-2651 bd-carousel-3" href="#">
+        <span></span>
+    </a>
+</div>
+
+<div class="bd-right-button">
+    <a class="data-control-id-2651 bd-carousel-3" href="#">
+        <span></span>
+    </a>
+</div>
+        <?php endif ?>
+    </div>
+<?php endif ?></div></div>
+</div>
+	
+		<div class="data-control-id-2744 bd-layoutcolumn-col-56 
+ col-md-12">
+    <div class="bd-layoutcolumn-56"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/overviewtitle', 1)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_priceContent = $this instanceof Mage_Catalog_Block_Product_Abstract ?
+                        $this->getPriceHtml($_product, true) :
+                        $_helper->getPriceHtml($_product);
+
+    echo $_helper->createTemplate('product/price', 5)
+        ->setContent($_priceContent)
+        ->toHtml()
+?>
+<?php endif ?>
+	
+		<?php if (isset($_product)): ?>
+    <div class="data-control-id-2731 bd-productrating-1">
+        <?php $_product->setRatingId(1) ?>
+        <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
+    </div>
+<?php endif ?>
+	
+		<?php
+    if ($_desc = $this->getChild('short_desc')) {
+        $_desc->setProduct($_product);
+        $_desc->setControlId(3);
+        echo $_desc->toHtml();
+    }
+?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/variations', 1)->setProduct($_product)->setContext($this)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_data = array(
+        'is_overview' => isset($_isOverview) && $_isOverview,
+        'context' => $this,
+        'product' => $_product
+    );
+    echo $_helper->createTemplate('product/buy', 4)->addData($_data)->toHtml()
+?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/tab-information', 1)->setContext($this)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url) {
+        if (this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+                if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                }
+            }
+
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+    //]]>
+</script>

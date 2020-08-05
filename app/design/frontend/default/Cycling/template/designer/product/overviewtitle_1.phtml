@@ -1,0 +1,5 @@
+<?php if ($_product = $this->getProduct()): ?>
+    <h2 class=" bd-productoverviewtitle-1">
+            <?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
+    </h2>
+<?php endif ?>

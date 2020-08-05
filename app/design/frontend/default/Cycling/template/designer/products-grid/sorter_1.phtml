@@ -1,0 +1,26 @@
+<?php $_block = $this->getContext() ?>
+<?php if ($_block): ?>
+    
+    <div class=" bd-productssorter-1 products-sorter">
+    
+    <select>
+        <?php foreach($_block->getAvailableOrders() as $_key => $_order): ?>
+            <option value="<?php echo $_block->getOrderUrl($_key, 'asc') ?>"<?php if($_block->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
+                <?php echo $this->__($_order) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
+    <?php if($_block->getCurrentDirection() == 'desc'): ?>
+        <a class="sort-order-link" href="<?php echo $_block->getOrderUrl(null, 'asc') ?>" title="<?php echo $this->__('Set Ascending Direction') ?>">
+            <img src="<?php echo $this->getSkinUrl('images/i_desc_arrow.gif') ?>" alt="<?php echo $this->__('Set Ascending Direction') ?>" class="v-middle" />
+        </a>
+    <?php else: ?>
+        <a class="sort-order-link" href="<?php echo $_block->getOrderUrl(null, 'desc') ?>" title="<?php echo $this->__('Set Descending Direction') ?>">
+            <img src="<?php echo $this->getSkinUrl('images/i_asc_arrow.gif') ?>" alt="<?php echo $this->__('Set Descending Direction') ?>" class="v-middle" />
+        </a>
+    <?php endif; ?>
+
+    </div>
+    
+<?php endif ?>

@@ -1,0 +1,15 @@
+<div class="box-collateral box-up-sell">
+    <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php
+        $settings = $_helper->getSliderSettings('Upsell');
+        if (!array_key_exists('header', $settings)) {
+            $settings['header'] = $this->__('We recommend');
+        }
+
+        echo $_helper->createSlider()
+            ->setItems($this->getItemCollection()->getItems())
+            ->setSettings($settings)
+            ->toHtml()
+    ?>
+    <?php endif ?>
+</div>

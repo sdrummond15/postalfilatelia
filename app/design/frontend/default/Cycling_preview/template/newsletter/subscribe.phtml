@@ -1,0 +1,27 @@
+<div class="block block-newsletter">
+    <div class="block-title">
+        <?php echo $this->__('Newsletter') ?>
+    </div>
+    <div class="block-content shape-only">
+        <form class="data-control-id-3062 bd-newsletter-1 form-inline" action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+            <div class="bd-container-inner">
+                <div class="bd-newsletter-wrapper field-row">
+                    
+                        
+                        <div class="bd-input-wrapper">
+                            <input placeholder="Enter your e-mail" type="text" name="email" id="newsletter" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="data-control-id-3061 bd-bootstrapinput form-control required-entry validate-email" />
+                        </div>
+                        
+                        <div class="bd-button-wrapper">
+                            <input type="submit" class="data-control-id-35259 bd-button" value="OK">
+                        </div>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            //<![CDATA[
+            var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+            //]]>
+        </script>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php
+        $settings = $_helper->getSliderSettings('2');
+        $_productHelper = $_helper->getProductHelper();
+    ?>
+    <?php if (!array_key_exists('enabled', $settings) || $settings['enabled']): ?>
+    <div class=" bd-featuredslider-2">
+        <div class="bd-container-inner">
+        <?php
+            $collection = null;
+
+            if (array_key_exists('source', $settings)) {
+                $count = 0;
+                if (array_key_exists('count', $settings)) {
+                    $count = $settings['count'];
+                }
+                switch ($settings['source']) {
+                    case $_productHelper->BESTSELLERS:
+                        if (empty($settings['products'])) {
+                            $collection = $_productHelper->getBestsellers($count);
+                        } else {
+                            $collection = $_productHelper->getProducts($settings['products']);
+                        }
+                        break;
+                    case $_productHelper->MOSTVIEWED:
+                        $collection = $_productHelper->getMostviewed($count);
+                        break;
+                    case $_productHelper->NEWPRODUCTS:
+                        $collection = $_productHelper->getNew($count);
+                        break;
+                    case $_productHelper->CATEGORY:
+                        if (array_key_exists('category', $settings)) {
+                            $collection = $_productHelper->getProductsByCategory($settings['category'], $count);
+                        }
+                        break;
+                }
+            }
+
+            if (!is_null($collection)) {
+                echo $_helper->createSlider()
+                    ->setItems($collection)
+                    ->setSettings($settings)
+                    ->toHtml();
+            } else {
+                echo '<p>' . $this->__('Empty slider settings. Please do "Apply Theme to Cms" and configure "Slider 2" in Admin panel.') . '</p>';
+            }
+        ?>
+        </div>
+    </div>
+    <?php endif ?>
+<?php endif ?>

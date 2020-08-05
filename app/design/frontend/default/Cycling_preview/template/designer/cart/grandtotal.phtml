@@ -1,0 +1,15 @@
+<?php $_block = $this->getContext() ?>
+<div class="data-control-id-2635 bd-block">
+    <div class="data-control-id-2634 bd-blockcontent bd-tagstyles">
+        <?php echo $_block->getChildHtml('totals'); ?>
+        <?php if(!$this->hasError()): ?>
+            <ul class="checkout-types">
+                <?php foreach ($_block->getMethods('methods') as $method): ?>
+                    <?php if ($methodHtml = $_block->getMethodHtml($method)): ?>
+                        <li><?php echo $methodHtml; ?></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+</div>

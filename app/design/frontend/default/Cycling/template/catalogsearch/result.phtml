@@ -1,0 +1,58 @@
+<div class=" bd-products">
+    <?php $_helper = Mage::registry('templateHelper') ?>
+    <?php if ($this->getResultCount()): ?>
+
+        
+            <div class=" bd-container-46 bd-tagstyles page-title">
+                <?php if ($this->helper('rss/catalog')->getTagFeedUrl()): ?>
+                    <a href="<?php echo $this->helper('rss/catalog')->getTagFeedUrl() ?>" class="nobr link-rss"><?php echo $this->__('Subscribe to Feed') ?></a>
+                <?php endif; ?>
+                <h2><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h2>
+            </div>
+
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+        <?php if ($_helper && ($messages = $this->getNoteMessages())):?>
+            <?php echo $_helper->getMessagesHelper()->notice($messages) ?>
+        <?php endif ?>
+
+        <div class="product-list">
+            <?php echo $this->getProductListHtml() ?>
+        </div>
+        <script>
+            jQuery(function ($) {
+                var layoutTypes = [];
+                
+                    layoutTypes.push({
+                        name:'bd-griditemgrid',
+                        iconUrl: '',
+                        iconDataId: '2382',
+                        iconClassNames: 'bd-icon-54'
+                    });
+                    layoutTypes.push({
+                        name:'bd-griditemlist',
+                        iconUrl: '',
+                        iconDataId: '2397',
+                        iconClassNames: 'bd-icon-55'
+                    });
+                window.initProductsToolbar('.bd-products > .product-list', layoutTypes);
+            });
+        </script>
+
+    <?php else: ?>
+
+        
+            <div class=" bd-container-46 bd-tagstyles page-title">
+                <h2><?php echo ($this->getHeaderText() || $this->getHeaderText() === false) ? $this->getHeaderText() : $this->__("Search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h2>
+            </div>
+
+        <?php
+            $messages = array($this->getNoResultText() ? $this->getNoResultText() : $this->__('Your search returns no results.'));
+            if ($_notes = $this->getNoteMessages()) {
+                $messages = array_merge($messages, $_notes);
+            }
+            echo $_helper ? $_helper->getMessagesHelper()->notice($messages) : '';
+        ?>
+
+    <?php endif; ?>
+</div>

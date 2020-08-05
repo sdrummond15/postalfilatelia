@@ -1,0 +1,15 @@
+<?php $_block = $this->getContext() ?>
+<?php if ($_block): ?>
+    
+    <div class="data-control-id-2356 bd-productsperpage-1 products-per-page">
+    
+    <select>
+        <?php foreach ($_block->getAvailableLimit() as  $_key=>$_limit): ?>
+            <option value="<?php echo $_block->getLimitUrl($_key) ?>"<?php if($_block->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                <?php echo $_limit ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    </div>
+    
+<?php endif ?>

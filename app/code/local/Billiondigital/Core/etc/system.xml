@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <billioncore translate="label" module="billioncore">
+            <label>Billion Core</label>
+            <sort_order>0</sort_order>
+        </billioncore>
+    </tabs>
+</config>

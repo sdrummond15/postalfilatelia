@@ -1,0 +1,9 @@
+<?php
+    $_data = array(
+        'use_cut' => true,
+        'product' => $this->getProduct()
+    );
+?>
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/desc', $this->getControlId())->addData($_data)->toHtml() ?>
+<?php endif ?>

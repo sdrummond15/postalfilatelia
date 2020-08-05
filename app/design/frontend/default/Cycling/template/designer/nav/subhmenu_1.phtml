@@ -1,0 +1,31 @@
+<div class="bd-menu-4-popup">
+    
+    <ul class=" bd-menu-4">
+        <?php $_items = $subcategories ?>
+        <?php foreach ($_items as $_subcategory): ?>
+            <?php if ($_helper = Mage::registry('templateHelper')): ?>
+<li class=" bd-menuitem-4">
+    <a class="<?php if ($_helper->categoryIsActive($_subcategory)): ?>active<?php endif ?>"
+        href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($_subcategory) ?>">
+        <span><?php echo $_subcategory->getName() ?></span>
+    </a>
+    <?php
+    $_subcategories = Mage::getModel('catalog/category')->getCollection()
+        ->setStoreId(Mage::app()->getStore()->getId())
+        ->addAttributeToSelect('*')
+        ->addAttributeToFilter('is_active','1')
+        ->addAttributeToFilter('include_in_menu','1')
+        ->addAttributeToFilter('parent_id', array('eq' => $_subcategory->getId()))
+        ->addAttributeToSort('position')
+        ->load();
+    ?>
+    <?php if ($_subcategories->count()): ?>
+        <?php $this->assign('subcategories', $_subcategories) ?>
+        <?php echo $this->_toHtml() ?>
+    <?php endif ?>
+</li>
+<?php endif ?>
+        <?php endforeach ?>
+    </ul>
+    
+</div>

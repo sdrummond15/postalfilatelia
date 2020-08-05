@@ -1,0 +1,193 @@
+<?php
+    $_productCollection = $this->getLoadedProductCollection();
+    $_productCollection
+        ->addAttributeToSelect('news_from_date')
+        ->addAttributeToSelect('news_to_date');
+    $_helper = $this->helper('catalog/output');
+    $_designerHelper = Mage::registry('templateHelper');
+    $_config = Mage::getConfig();
+    $theme = Mage::getSingleton('core/design_package')->getTheme('frontend');
+    $_cookie = Mage::getModel('core/cookie');
+    $_currentCategory = $this->getCurrentCategory();
+
+    $_defaultLayout = ($_layoutType = $_cookie->get('layoutType')) ? $_layoutType : 'grid';
+?>
+
+<?php if ($_productCollection->count()): ?>
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <?php $_columnCount = $this->getColumnCount() ?>
+
+    <?php echo $this->getToolbarHtml() ?>
+
+    <div class=" bd-grid-15">
+      <div class="container-fluid">
+        <div class="separated-grid row">
+            <?php $i = 0; foreach ($_productCollection as $_product): ?>
+                
+                <div class="separated-item-4 col-md-8 grid"<?php if ('grid' !== $_defaultLayout) { echo ' style="display:none;"';} ?>>
+                    <div class=" bd-griditem-4">
+                        <div class=" bd-layoutcontainer-34">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class=" bd-layoutcolumn-col-76 
+ col-md-24">
+    <div class="bd-layoutcolumn-76"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/image', 4)->setProduct($_product)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+	
+		<div class=" bd-layoutcontainer-48">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                    bd-row-auto-height
+                    
+ bd-row-align-top
+                ">
+                <div class=" bd-layoutcolumn-col-124 
+ col-md-16">
+    <div class="bd-layoutcolumn-124"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/title', 7)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php
+    if ($_desc = $this->getChild('short_desc')) {
+        $_desc->setProduct($_product);
+        $_desc->setControlId(1);
+        echo $_desc->toHtml();
+    }
+?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-98 
+ col-md-8">
+    <div class="bd-layoutcolumn-98"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_priceContent = $this instanceof Mage_Catalog_Block_Product_Abstract ?
+                        $this->getPriceHtml($_product, true) :
+                        $_helper->getPriceHtml($_product);
+
+    echo $_helper->createTemplate('product/price', 3)
+        ->setContent($_priceContent)
+        ->toHtml()
+?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_data = array(
+        'is_overview' => isset($_isOverview) && $_isOverview,
+        'context' => $this,
+        'product' => $_product
+    );
+    echo $_helper->createTemplate('product/buy', 2)->addData($_data)->toHtml()
+?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/product-new', 2)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/product-sale', 2)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/out-of-stock', 2)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+                    </div>
+                </div>
+                <div class="separated-item-5 col-md-24 list"<?php if ('list' !== $_defaultLayout) { echo ' style="display:none;"';} ?>>
+                    <div class=" bd-griditem-5">
+                        <div class=" bd-layoutcontainer-26">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class=" bd-layoutcolumn-col-49 
+ col-md-6">
+    <div class="bd-layoutcolumn-49"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/image', 5)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/product-new', 3)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/product-sale', 3)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/out-of-stock', 3)->setProduct($_product)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-50 
+ col-md-12">
+    <div class="bd-layoutcolumn-50"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/title', 9)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php
+    if ($_desc = $this->getChild('short_desc')) {
+        $_desc->setProduct($_product);
+        $_desc->setControlId(2);
+        echo $_desc->toHtml();
+    }
+?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-51 
+ col-md-6">
+    <div class="bd-layoutcolumn-51"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_priceContent = $this instanceof Mage_Catalog_Block_Product_Abstract ?
+                        $this->getPriceHtml($_product, true) :
+                        $_helper->getPriceHtml($_product);
+
+    echo $_helper->createTemplate('product/price', 4)
+        ->setContent($_priceContent)
+        ->toHtml()
+?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_data = array(
+        'is_overview' => isset($_isOverview) && $_isOverview,
+        'context' => $this,
+        'product' => $_product
+    );
+    echo $_helper->createTemplate('product/buy', 3)->addData($_data)->toHtml()
+?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+      </div>
+    </div>
+
+    <?php echo $this->getChild('toolbar')->setTemplate('catalog/product/list/footerBar.phtml')->toHtml() ?>
+
+<?php endif ?>

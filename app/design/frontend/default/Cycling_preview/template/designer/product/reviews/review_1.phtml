@@ -1,0 +1,42 @@
+<div class="data-control-id-2843 bd-productreview-1">
+    <?php if ($_header = $this->getHeader()): ?>
+    <h4 class="data-control-id-2758 bd-reviewheader-1">
+        <?php echo $_header ?>
+    </h4>
+<?php endif ?>
+	
+		<?php if (($_author = $this->getAuthor()) && ($_date = $this->getDate())): ?>
+<div class="data-control-id-2747 bd-reviewmetadata-1">
+    <a href="#"><?php echo $_author ?></a> <?php echo $_date ?>
+</div>
+<?php endif ?>
+	
+		<?php if ($_text = $this->getText()): ?>
+<div class="data-control-id-2748 bd-reviewtext-1">
+    <?php echo $_text ?>
+</div>
+<?php endif ?>
+	
+		<?php $_votes = $this->getRatingVotes() ?>
+<?php $_helper = Mage::registry('templateHelper') ?>
+<?php if ($_votes && count($_votes) && $_helper): ?>
+    <?php $_ratingTpl = $_helper->createTemplate('product/reviews/rating', 2) ?>
+    <div class="data-control-id-2757 bd-reviewrating-2">
+        <table class="ratings-table">
+            <col width="1" />
+            <col />
+            <tbody>
+            <?php foreach ($_votes as $_vote): ?>
+                <tr>
+                    <th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
+                    <td>
+                        <?php $_ratingTpl->setPercent($_vote->getPercent()) ?>
+                        <?php echo $_ratingTpl->toHtml() ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif ?>
+</div>

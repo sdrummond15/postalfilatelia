@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <billionthemler translate="label" module="billionthemler">
+            <label>Billion Themler</label>
+            <sort_order>0</sort_order>
+        </billionthemler>
+    </tabs>
+</config>

@@ -1,0 +1,123 @@
+<?php if ($this->getIsNeedToDisplaySideBar()):?>
+    <?php $_cartHelper = Mage::helper('checkout/cart') ?>
+    <?php $_cartQty = $this->getSummaryCount() ?>
+    <div class="block block-cart">
+        <div class="block-title">
+            <?php echo $this->__('My Cart') ?>
+        </div>
+        <div class="block-content">
+            <?php if ($_cartQty > 0): ?>
+                <?php Mage::register('product_image_size', 85) ?>
+                <div class=" bd-cartcontainer-1">
+    <?php
+    $_block = Mage::app()->getLayout()->getBlock('cart.popup_link');
+    $_items = $_block->getRecentItems();
+?>
+
+<div class=" bd-grid-11">
+    <div class="container-fluid">
+        <div class="separated-grid row">
+        <?php foreach ($_items as $_item): ?>
+            <?php
+                $_helper = $this->helper('catalog/output');
+                $_product = $_item->getProduct();
+                $_itemRenderer = $_block->getItemRenderer($_item->getProductType());
+                $_itemRenderer->setItem($_item);
+                $isVisibleProduct = $_product->isVisibleInSiteVisibility();
+            ?>
+            <div class="separated-item-1 col-md-24 list">
+    <div class=" bd-griditem-1"><div class=" bd-layoutcontainer-1">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class=" bd-layoutcolumn-col-1 
+ col-md-9">
+    <div class="bd-layoutcolumn-1"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/image', 1)->setProduct($_product)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-2 
+ col-md-10">
+    <div class="bd-layoutcolumn-2"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/title', 1)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/price', 1)->setContext($_itemRenderer)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-3 
+ col-md-5">
+    <div class="bd-layoutcolumn-3"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/edit-link', 1)->setContext($_itemRenderer)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/remove-link', 1)->setContext($_itemRenderer)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div></div>
+</div>
+        <?php endforeach ?>
+        </div>
+    </div>
+</div>
+	
+		<?php if ($_block = Mage::app()->getLayout()->getBlock('cart.popup_link')): ?>
+    <div class=" bd-pricetext-4">
+    <?php if ($_block = Mage::app()->getLayout()->getBlock('cart.popup_link')): ?>
+    <?php if ($_block->canApplyMsrp()): ?>
+        <span class=" bd-label-4"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+    <?php else: ?>
+        <span class=" bd-label-4"><?php echo $this->__('Cart Subtotal:') ?></span>
+    <?php endif ?>
+<?php endif ?>
+    <?php if (!$_block->canApplyMsrp()): ?>
+        <span class=" bd-container-6 bd-tagstyles">
+            <?php echo Mage::helper('checkout')->formatPrice($_block->getSubtotal()) ?>
+            <?php if ($_subtotalInclTax = $_block->getSubtotalInclTax()): ?>
+                (<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+            <?php endif; ?>
+        </span>
+    <?php endif; ?>
+    </div>
+<?php endif ?>
+	
+		<div class=" bd-layoutcontainer-2">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row
+                
+                ">
+                <div class=" bd-layoutcolumn-col-4 
+ col-md-7">
+    <div class="bd-layoutcolumn-4"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/view', 1)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+	
+		<div class=" bd-layoutcolumn-col-5 
+ col-md-17">
+    <div class="bd-layoutcolumn-5"><div class="bd-vertical-align-wrapper"><?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('cart/checkout', 1)->toHtml() ?>
+<?php endif ?></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+                <?php Mage::unregister('product_image_size') ?>
+            <?php else: ?>
+                <span><?php echo $this->__('You have no items in your shopping cart.') ?></span>
+            <?php endif ?>
+        </div>
+    </div>
+<?php endif ?>

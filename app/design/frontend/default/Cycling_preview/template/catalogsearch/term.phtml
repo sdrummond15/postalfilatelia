@@ -1,0 +1,30 @@
+<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php $_buffer = $_helper->getCaptureModel() ?>
+
+    <?php if ($_buffer->capture('header')): ?>
+        <?php echo $this->__('Popular Search Terms') ?>
+    <?php endif ?>
+
+    <?php if ($_buffer->capture('content')): ?>
+        <?php if( sizeof($this->getTerms()) > 0 ): ?>
+            <ul class="tags-list">
+                <?php foreach ($this->getTerms() as $_term): ?>
+                    <li><a href="<?php echo $this->getSearchUrl($_term) ?>" style="font-size:<?php echo $_term->getRatio()*70+75 ?>%;"><?php echo $this->htmlEscape($_term->getName()) ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <?php echo $_helper->getMessagesHelper()->notice($this->__('There are no search terms available.')) ?>
+        <?php endif ?>
+    <?php endif ?>
+
+    <?php
+        $_blogInfo = Mage::registry('contentRenderer');
+        if (!$_blogInfo) {
+            $_blogInfo = array('template' => 'blog', 'id' => null);
+        }
+        $_blogTpl = $_helper->createTemplate($_blogInfo['template']);
+        $_blogTpl->setId($_blogInfo['id']);
+        $_blogTpl->setArticles($_buffer->complete());
+        echo $_blogTpl->toHtml();
+    ?>
+<?php endif ?>

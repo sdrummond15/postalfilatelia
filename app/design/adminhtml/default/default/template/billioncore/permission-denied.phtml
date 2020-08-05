@@ -1,0 +1,30 @@
+<h3><?php if ($_header = $this->getHeader()): ?><?php echo $_header ?><?php else: ?>Insufficient permissions.<?php endif ?></h3>
+<p>
+    The theme cannot be edited. Please make sure that the user and group running web server is granted the appropriate
+    read, write and execute(linux only) permissions on the following folders. As well as read and write permission on
+    the files in these folders:
+</p>
+<?php if (($dirs = $this->getDirs()) && is_array($dirs)): ?>
+<ul>
+    <?php foreach ($dirs as $dir): ?>
+        <li><?php echo $dir ?></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+<p>How to do this for MacOS or Linux systems:</p>
+<ol>
+    <li>login ssh/terminal under privileged user, get sufficient access rights if need using sudo or su to make next changes</li>
+    <li>cd <?php echo MAGENTO_ROOT ?></li>
+    <li>
+        <div>chmod -R u=rwX,g=rX folder_name</div>
+        <div><i>For example: chmod -R u=rwX,g=rX app/code/local</i></div>
+    </li>
+    <li>
+        <div>chown -R &#60;user>:&#60;group> folder_name</div>
+        <div><i>For example: chown –R apache:apache app/code/local</i></div>
+    </li>
+</ol>
+<p>
+    <b>Note</b>: It is general approach. We would recommend that you ask your hosting administrator to grant access
+    permissions for listed folders and files.
+</p>

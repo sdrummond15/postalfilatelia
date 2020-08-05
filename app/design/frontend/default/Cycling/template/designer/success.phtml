@@ -1,0 +1,8 @@
+<?php if (($_messages = $this->getMessages()) && is_array($_messages)): ?>
+<div class=" bd-successmessage-1 alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <?php foreach($_messages as $_message): ?>
+        <p><?php echo $_message ?></p>
+    <?php endforeach ?>
+</div>
+<?php endif ?>

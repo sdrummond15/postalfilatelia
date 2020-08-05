@@ -1,0 +1,43 @@
+<?php $_helper = Mage::registry('templateHelper') ?>
+<?php if ($_helper && ($_currency = Mage::app()->getLayout()->getBlock('currency_button'))): ?>
+    <?php
+    $_options = array(
+        'showLabel' => false,
+        'showArrow' => true,
+        'textType' => 'short'
+    );
+    ?>
+
+<div class="data-control-id-478 bd-currency-3" data-responsive-menu="true" data-responsive-levels="">
+    <div class="data-control-id-141952 bd-horizontalmenu-4 clearfix">
+        <div class="bd-container-inner">
+            <?php $_submenu = $_helper->createTemplate('currency/submenu', 3) ?>
+            <ul class="data-control-id-141953 bd-menu-7 nav nav-pills navbar-left">
+    <li class="data-control-id-141954 bd-menuitem-7">
+    <a href="#" class="dropdown-toggle">
+        <span><?php if ($_options['showLabel']): ?>Currency: <?php endif ?>
+        <?php
+            $_currentCode = $_currency->getCurrentCurrencyCode();
+            $_currencies = $_currency->getCurrencies();
+            $_currencyText = '';
+            if ($_options['textType'] === 'noText') {
+                $_currencyText .= Mage::app()->getLocale()->currency($_currentCode)->getSymbol();
+            } else if ($_options['textType'] === 'short') {
+                $_currencyText .= $_currentCode;
+            } else if ($_options['textType'] === 'full') {
+                $_currencyText .= Mage::app()->getLocale()->currency($_currentCode)->getSymbol()
+                    . ' ' . $_currencies[$_currentCode];
+            }
+            echo $_currencyText
+        ?>
+        </span>
+        <?php if ($_options['showArrow']): ?><span class="caret"></span><?php endif ?>
+    </a>
+    <?php echo $_submenu->setContext($_currency)->toHtml() ?>
+</li>
+</ul>
+        </div>
+    </div>
+</div>
+
+<?php endif ?>

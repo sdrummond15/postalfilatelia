@@ -1,0 +1,5 @@
+<?php
+    if (($_formId = $this->getFormId()) && ($_helper = Mage::registry('templateHelper'))) {
+        echo $_helper->createTemplate('product/reviews/form', $_formId)->assign(array('data' => $data, 'form' => $this))->toHtml();
+    }
+?>

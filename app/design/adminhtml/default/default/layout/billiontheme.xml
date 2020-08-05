@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <billiontheme_adminhtml_list_index>
+        <reference name="content">
+            <block type="adminhtml/template" name="billiontheme_list" template="billiontheme/list.phtml"/>
+        </reference>
+    </billiontheme_adminhtml_list_index>
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>billiontheme/css/style.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>billiontheme/js/jquery.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>billiontheme/js/script.js</name>
+            </action>
+        </reference>
+    </default>
+</layout>

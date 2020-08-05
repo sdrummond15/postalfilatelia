@@ -1,0 +1,67 @@
+<div class=" bd-products">
+
+    
+        <div class=" bd-container-46 bd-tagstyles page-title">
+            <h2><?php echo $this->__('Catalog Advanced Search') ?></h2>
+        </div>
+
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+    <?php if($this->getResultCount()): ?>
+        <p class="advanced-search-amount">
+            <?php echo $this->helper('catalogsearch')->__('<strong>%d item(s)</strong> were found using the following search criteria', $this->getResultCount()); ?>
+        </p>
+    <?php else: ?>
+        <?php $_helper = Mage::registry('templateHelper') ?>
+        <?php $_message = $this->helper('catalogsearch')->__('No items were found using the following search criteria.') ?>
+        <?php $_linkText = $this->helper('catalogsearch')->__('Modify your search') ?>
+        <?php $_link = $_message . ' <a href="' . $this->getFormUrl() . '">' . $_linkText . '</a>' ?>
+        <?php echo $_helper ? $_helper->getMessagesHelper()->warning($_link, false) : $_link ?>
+    <?php endif; ?>
+
+    <div class="advanced-search-summary">
+        <?php $searchCriterias=$this->getSearchCriterias(); ?>
+            <?php foreach (array('left', 'right') as $side): ?>
+                <?php if (array_key_exists($side, $searchCriterias)): ?>
+                    <ul>
+                        <?php foreach($searchCriterias[$side] as $criteria): ?>
+                            <li><strong><?php echo $this->htmlEscape($this->helper('catalog')->__($criteria['name'])); ?>:</strong> <?php echo $this->htmlEscape($criteria['value']); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php if($this->getResultCount()): ?>
+            <p>
+                <?php echo $this->helper('catalogsearch')->__("Don't see what you're looking for?"); ?>
+                <a href="<?php echo $this->getFormUrl(); ?>"><?php echo $this->helper('catalogsearch')->__('Modify your search'); ?></a>
+            </p>
+        <?php endif; ?>
+    </div>
+
+    <?php if($this->getResultCount()): ?>
+        <div class="product-list">
+            <?php echo $this->getProductListHtml() ?>
+        </div>
+        <script>
+            jQuery(function ($) {
+                var layoutTypes = [];
+                
+                    layoutTypes.push({
+                        name:'bd-griditemgrid',
+                        iconUrl: '',
+                        iconDataId: '2382',
+                        iconClassNames: 'bd-icon-54'
+                    });
+                    layoutTypes.push({
+                        name:'bd-griditemlist',
+                        iconUrl: '',
+                        iconDataId: '2397',
+                        iconClassNames: 'bd-icon-55'
+                    });
+                window.initProductsToolbar('.bd-products > .product-list', layoutTypes);
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php $this->getSearchCriterias(); ?>
+</div>

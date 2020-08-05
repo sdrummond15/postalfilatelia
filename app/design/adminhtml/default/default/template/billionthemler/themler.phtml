@@ -1,0 +1,25 @@
+<?php
+    $_urlHelper = Mage::helper('billionthemler/url');
+    $_themeName = $this->getTheme();
+    $_manifestUrl = '';
+
+    if (strlen($_version = Billiondigital_Themler_Model_Manifest::getThemeVersion($_themeName))) {
+        Billiondigital_Themler_Model_Manifest::restore($_themeName, $_version);
+        if (Billiondigital_Themler_Model_Manifest::exists($_version)) {
+            $_manifestUrl = Billiondigital_Themler_Model_Manifest::getUrl($_version);
+        }
+    }
+?>
+<!DOCTYPE html>
+<html<?php if ($_manifestUrl): ?> manifest="<?php echo $_manifestUrl ?>"<?php endif ?>>
+<head>
+    <title>Themler</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script type="text/javascript" src="<?php echo Mage::getUrl('billionthemler/adminhtml_theme/project', array('theme' => $_themeName, 'version' => $_version)) ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('billionthemler/js/DataProvider.js') ?>?version=<?php echo $_version ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('billionthemler/js/loader.js') ?>?version=<?php echo $_version ?>"></script>
+</head>
+<body>
+    <div id="theme_editor"></div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Billiondigital_Themler>
+            <version>0.1.3</version>
+        </Billiondigital_Themler>
+    </modules>
+    <frontend>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <billionthemler_model_observer>
+                        <class>Billiondigital_Themler_Model_Observer</class>
+                        <method>controller_action_predispatch</method>
+                    </billionthemler_model_observer>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+        <layout>
+            <updates>
+                <billionthemler>
+                    <file>billionthemler.xml</file>
+                </billionthemler>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <helpers>
+            <billionthemler>
+                <class>Billiondigital_Themler_Helper</class>
+            </billionthemler>
+        </helpers>
+        <blocks>
+            <billionthemler>
+                <class>Billiondigital_Themler_Block</class>
+            </billionthemler>
+        </blocks>
+        <models>
+            <billionthemler>
+                <class>Billiondigital_Themler_Model</class>
+                <resourceModel>designer_resource</resourceModel>
+            </billionthemler>
+            <core>
+                <rewrite>
+                    <url>Billiondigital_Themler_Model_Url</url>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+    <admin>
+        <routers>
+            <billionthemler>
+                <use>admin</use>
+                <args>
+                    <module>Billiondigital_Themler</module>
+                    <frontName>designer</frontName>
+                </args>
+            </billionthemler>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <billionthemler translate="title" module="billionthemler">
+                            <title>Billion Themler</title>
+                            <sort_order>1000</sort_order>
+                            <children>
+                                <index translate="title">
+                                    <title>Billion Themler</title>
+                                </index>
+                            </children>
+                        </billionthemler>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <billionthemler>
+                    <file>billionthemler.xml</file>
+                </billionthemler>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <Billiondigital_Themler />
+            </modules>
+        </suite>
+    </phpunit>
+</config>

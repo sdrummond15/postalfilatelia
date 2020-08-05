@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Billiondigital_Core>
+            <version>0.1.3</version>
+        </Billiondigital_Core>
+    </modules>
+    <global>
+        <helpers>
+            <billioncore>
+                <class>Billiondigital_Core_Helper</class>
+            </billioncore>
+        </helpers>
+        <blocks>
+            <billioncore>
+                <class>Billiondigital_Core_Block</class>
+            </billioncore>
+        </blocks>
+        <models>
+            <billioncore>
+                <class>Billiondigital_Core_Model</class>
+                <resourceModel>billioncore_resource</resourceModel>
+            </billioncore>
+        </models>
+        <cache>
+            <types>
+                <billioncore module="billioncore" translate="label description">
+                    <label>Billion Cache</label>
+                    <description>Billion Cache</description>
+                    <tags>BILLIONDIGITAL_CORE</tags>
+                </billioncore>
+            </types>
+        </cache>
+    </global>
+    <phpunit>
+        <suite>
+            <modules>
+                <Billiondigital_Core />
+            </modules>
+        </suite>
+    </phpunit>
+</config>

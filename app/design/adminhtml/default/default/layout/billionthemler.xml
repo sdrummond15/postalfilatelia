@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <billionthemler_adminhtml_theme_index>
+        <block type="adminhtml/template" name="root" template="billionthemler/themler.phtml"/>
+    </billionthemler_adminhtml_theme_index>
+
+    <billionthemler_adminhtml_theme_project>
+        <block type="adminhtml/template" name="root" template="billionthemler/project.phtml"/>
+    </billionthemler_adminhtml_theme_project>
+</layout>

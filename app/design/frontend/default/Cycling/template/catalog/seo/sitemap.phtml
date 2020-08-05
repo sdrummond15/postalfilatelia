@@ -1,0 +1,19 @@
+<?php $_items = $this->getCollection(); ?>
+<?php if($_items->getSize()): ?>
+    <ul class="sitemap">
+        <?php foreach ($_items as $_item): ?>
+            <li><a href="<?php echo $this->getItemUrl($_item) ?>"><?php echo $this->escapeHtml($_item->name) ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <?php $_helper = Mage::registry('templateHelper') ?>
+    <?php $_title = $this->__('There are no %s available.', $this->getItemsTitle()) ?>
+    <?php echo $_helper ? $_helper->getMessagesHelper()->notice($_title) : $_title; ?>
+    <script type="text/javascript">
+    //<![CDATA[
+        if ($('sitemap_top_links') != undefined) {
+            $('sitemap_top_links').hide();
+        }
+    //]]>
+    </script>
+<?php endif ?>

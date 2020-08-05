@@ -1,0 +1,25 @@
+<?php $_product = $this->getProduct(); ?>
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+
+<div class="add-to-links">
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+    <p>
+        <a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist">
+            <?php echo $this->__('Add to Wishlist') ?>
+        </a>
+    </p>
+<?php endif ?>
+<?php
+    $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product);
+?>
+<?php if ($_compareUrl) : ?>
+    <p>
+        <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a>
+    </p>
+<?php endif; ?>
+<?php if (($_productView = Mage::app()->getLayout()->getBlock('product.info')) && $_productView->canEmailToFriend()): ?>
+    <p class="email-friend">
+        <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a>
+    </p>
+<?php endif; ?>
+</div>

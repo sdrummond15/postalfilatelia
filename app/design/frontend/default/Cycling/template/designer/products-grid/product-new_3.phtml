@@ -1,0 +1,14 @@
+<?php if ($_product = $this->getProduct()): ?>
+    <?php
+    $_isNewPeriod = Mage::app()->getLocale()->isStoreDateInInterval(
+        Mage::app()->getStore(),
+        $_product->getNewsFromDate(),
+        $_product->getNewsToDate()
+    );
+
+    if (($_product->getNewsFromDate() || $_product->getNewsToDate()) && $_isNewPeriod): ?>
+        <div class=" bd-productnewicon bd-productnew-3">
+            <span>New!</span>
+        </div>
+    <?php endif ?>
+<?php endif ?>

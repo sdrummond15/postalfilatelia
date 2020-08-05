@@ -1,0 +1,80 @@
+<?php
+/**
+ * Pager template
+ *
+ * @see Mage_Page_Block_Html_Pager
+ */
+?>
+
+<?php if($this->getCollection()->getSize()): ?>
+
+        <ul class=" bd-pagination pagination products-pager">
+
+        <?php if($this->getLastPageNum() > 1): ?>
+
+            <?php if (!$this->isFirstPage()): ?>
+                <li class=" bd-paginationitem-1">
+                    <a id="prev-button" href="<?php echo $this->getPreviousPageUrl() ?>" title="<?php echo $this->__('Previous') ?>">
+                        <?php if(!$this->getAnchorTextForPrevious()): ?>
+                            <?php echo $this->__('Previous') ?>
+                        <?php else: ?>
+                            <?php echo $this->getAnchorTextForPrevious() ?>
+                        <?php endif;?>
+                    </a>
+                </li>
+            <?php endif;?>
+
+            <?php if ($this->canShowFirst()): ?>
+                <li class=" bd-paginationitem-1">
+                    <a href="<?php echo $this->getFirstPageUrl() ?>">1</a>
+                </li>
+            <?php endif;?>
+
+            <?php if ($this->canShowPreviousJump()): ?>
+                <li class=" bd-paginationitem-1">
+                    <a title="" href="<?php echo $this->getPreviousJumpUrl() ?>">...</a>
+                </li>
+            <?php endif;?>
+
+            <?php foreach ($this->getFramePages() as $_page): ?>
+                <?php $_isActive = $this->isPageCurrent($_page) ?>
+
+                <li class=" bd-paginationitem-1 <?php if ($_isActive): ?> active<?php endif ?>">
+                    <?php if ($_isActive): ?>
+                        <span><?php echo $_page ?></span>
+                    <?php else: ?>
+                        <a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a>
+                    <?php endif;?>
+                </li>
+            <?php endforeach;?>
+
+
+            <?php if ($this->canShowNextJump()): ?>
+                <li class=" bd-paginationitem-1">
+                    <a title="" href="<?php echo $this->getNextJumpUrl() ?>">...</a>
+                </li>
+            <?php endif;?>
+
+            <?php if ($this->canShowLast()): ?>
+                <li class=" bd-paginationitem-1">
+                    <a href="<?php echo $this->getLastPageUrl() ?>"><?php echo $this->getLastPageNum() ?></a>
+                </li>
+            <?php endif;?>
+
+            <?php if (!$this->isLastPage()): ?>
+                <li class=" bd-paginationitem-1">
+                    <a id="next-button" href="<?php echo $this->getNextPageUrl() ?>" title="<?php echo $this->__('Next') ?>">
+                        <?php if(!$this->getAnchorTextForNext()): ?>
+                            <?php echo $this->__('Next') ?>
+                        <?php else: ?>
+                            <?php echo $this->getAnchorTextForNext() ?>
+                        <?php endif;?>
+                    </a>
+                </li>
+            <?php endif;?>
+
+        <?php endif; ?>
+
+        </ul>
+
+<?php endif ?>

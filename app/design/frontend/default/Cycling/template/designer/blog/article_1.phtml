@@ -1,0 +1,23 @@
+<article class=" bd-article-1 clearfix">
+    <?php if ($_header = $this->getHeader()): ?>
+    <h2 class=" bd-postheader-1">
+        <?php echo $_header ?>
+    </h2>
+<?php endif ?>
+	
+		<?php if ($_content = $this->getContent()): ?>
+    <div class=" bd-postcontent-1 bd-tagstyles">
+        <?php echo $_content ?>
+    </div>
+<?php endif ?>
+	
+		<ul class=" bd-pagination pagination">
+    <li class=" bd-paginationitem-1 disabled"><a href="#">Prev</a></li>
+<li class=" bd-paginationitem-1 active"><a href="#">1</a></li>
+<li class=" bd-paginationitem-1"><a href="#">2</a></li>
+<li class=" bd-paginationitem-1"><a href="#">3</a></li>
+<li class=" bd-paginationitem-1"><a href="#">4</a></li>
+<li class=" bd-paginationitem-1"><a href="#">5</a></li>
+<li class=" bd-paginationitem-1"><a href="#">Next</a></li>
+</ul>
+</article>

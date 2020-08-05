@@ -1,0 +1,16 @@
+<?php if ($this->getReviewsCount()): ?>
+    <?php if ($this->getRatingSummary()): ?>
+        <?php if (($_product = $this->getProduct()) && ($_ratingId = $_product->getRatingId()) && ($_helper = Mage::registry('templateHelper'))): ?>
+            <?php echo $_helper->createTemplate('product/rating', $_ratingId)->setPercent($this->getRatingSummary())->toHtml() ?>
+        <?php endif ?>
+    <?php endif ?>
+    <div class="ratings">
+        <p class="rating-links">
+            <a href="#product_tabs_reviews"><?php echo $this->__('%d Review(s)', $this->getReviewsCount()) ?></a>
+            <span class="separator">|</span>
+            <a href="#review-form"><?php echo $this->__('Add Your Review') ?></a>
+        </p>
+    </div>
+<?php elseif ($this->getDisplayIfEmpty()): ?>
+    <p class="no-rating"><a href="#review-form"><?php echo $this->__('Be the first to review this product') ?></a></p>
+<?php endif; ?>

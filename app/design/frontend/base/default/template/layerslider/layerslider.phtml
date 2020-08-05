@@ -1,0 +1,95 @@
+<?php
+$collection = $this->getSlides();
+$_slides = $collection->getData();
+?>
+
+<?php // Slide Transition Effects Called
+echo $this->getLayout()->createBlock('core/template')->setTemplate('layerslider/layersliderjs.phtml')->toHtml(); ?>
+
+<?php //Caption Configuration
+	$captionStatus1 = Mage::getStoreConfig('layerslider/captionsettings/caption1');
+	$captionStatus2 = Mage::getStoreConfig('layerslider/captionsettings/caption2');
+	$captionStatus3 = Mage::getStoreConfig('layerslider/captionsettings/caption3');
+	$captionStatus4 = Mage::getStoreConfig('layerslider/captionsettings/caption4');
+	$captionStatus5 = Mage::getStoreConfig('layerslider/captionsettings/caption5');
+	$captionImg1 = Mage::getStoreConfig('layerslider/captionsettings/captionimg1');
+	$captionImg2 = Mage::getStoreConfig('layerslider/captionsettings/captionimg2');
+	$bulletNumber = Mage::getStoreConfig('layerslider/settings/bulletnumber');
+    $slideLink = Mage::getStoreConfig('layerslider/settings/slidelinkurl');
+	$slideHeight = Mage::getStoreConfig('layerslider/slidesettings/slideheight');
+	$slideWidth = Mage::getStoreConfig('layerslider/slidesettings/slidewidth');
+?>
+<div id="slide_parent" style="width:<?php echo $slideWidth;?>px">
+	<div id="slider1_container"  class="slide_container" style="height:<?php echo $slideHeight;?>px; width:<?php echo $slideWidth;?>px">
+			<!-- Loading Screen --> 
+			<div u="loading" style="position: absolute; top: 0px; left: 0px;">
+				<div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+	
+					background-color: #000; top: 0px; left: 0px;width: 100%; height:100%;"> 
+				</div> 
+				<div style="position: absolute; display: block; background: url(img/loading.gif) no-repeat center center;
+	
+					top: 0px; left: 0px;width: 100%;height:100%;">
+				</div> 
+			</div> 
+			<div u="slides" class="slides-inner" style="height:<?php echo $slideHeight;?>px; width:<?php echo $slideWidth;?>px">
+			<!-- Slides Container --> 
+			<?php $count = 0; ?> 
+	<?php foreach($_slides as $_slide){
+			$count++;
+			$class = "slide-".$count;
+			$mainImg = $_slide['slide_img'];
+		?>
+				<div class="sli <?php echo $class?>" style="height:<?php echo $slideHeight;?>px; width:<?php echo $slideWidth;?>px">
+					<?php if($slideLink == 1 && $_slide[slide_url] != NULL):
+						?><a href="<?php echo $_slide[slide_url] ?>" title=""><?php endif; ?>
+					<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$mainImg?>" alt="<?php echo $_slide['slide_title'] ?>"/>
+					<?php if($slideLink == 1 && $_slide[slide_url] != NULL): ?>
+					</a>
+					<?php endif; ?>
+					<?php if($captionStatus1 == 1 && $_slide['slide_caption1'] != NULL):?>
+						<div u=caption t="caption1" class="cap-tion cap-pos1"><?php echo $_slide['slide_caption1'] ?></div>
+					<?php endif;?>
+					<?php if($captionStatus2 == 1 && $_slide['slide_caption2'] != NULL):?>
+						<div u=caption t="caption2" class="cap-tion cap-pos2"><?php echo $_slide['slide_caption2'] ?></div>
+					<?php endif;?>
+					<?php if($captionStatus3 == 1 && $_slide['slide_caption3'] != NULL):?>
+						<div u=caption t="caption3" class="cap-tion cap-pos3"><?php echo $_slide['slide_caption3'] ?></div>
+					<?php endif;?>
+					<?php if($captionImg1 == 1 && $_slide['slide_captionimg1'] != NULL):?>
+						<div u=caption t="caption-img1" class="cap-tion cap-img1"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$_slide['slide_captionimg1'] ?>"/></div>
+					<?php endif;?>
+					<?php if($captionStatus4 == 1 && $_slide['slide_caption4'] != NULL):?>
+						<div u=caption t="caption4" class="cap-tion cap-pos4"><?php echo $_slide['slide_caption4'] ?></div>
+					<?php endif;?>
+					<?php if($captionStatus5 == 1 && $_slide['slide_caption5'] != NULL):?>
+						<div u=caption t="caption5" class="cap-tion cap-pos5"><?php echo $_slide['slide_caption5'] ?></div>
+					<?php endif;?>
+					
+					<?php if($captionImg2 == 1 && $_slide['slide_captionimg2'] != NULL):?>
+						<div u=caption t="caption-img2" class="cap-tion cap-img2"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$_slide['slide_captionimg2'] ?>"/></div>
+					<?php endif;?>
+				</div>
+		<?php } ?>
+			</div> 
+			
+			<!-- bullet Start -->
+			<div u="navigator" class="jssorb03">
+			   <div u="prototype" style="POSITION: absolute; WIDTH: 23px; HEIGHT: 23px; text-align:center; line-height:23px; color:White; font-size:12px;">				  
+			   <?php if($bulletNumber == 1):?>
+				<NumberTemplate></NumberTemplate>
+			   <?php endif; ?>
+				</div>
+			</div>
+			<!-- bullet End --> 
+			
+			<!-- Arrow Start -->
+				<span u="arrowleft" class="jssora20l" style="width: 55px; height: 55px; top: 123px; left: 50px;">
+			</span>
+				
+				<span u="arrowright" class="jssora20r" style="width: 55px; height: 55px; top: 123px; right: 50px">
+			</span>
+			<!-- Arrow End -->
+			  
+		</div>
+</div>

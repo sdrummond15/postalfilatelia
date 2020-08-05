@@ -1,0 +1,142 @@
+<?php if (($_items = $this->getItems()) && ($_itemsCount = count($_items))): ?>
+<?php
+    $_i = 0;
+
+    $_helper = $this->helper('catalog/output');
+    $_settings = $this->getSettings();
+    $_related = $this->getShowRelatedCheckbox();
+    $_after = $this->getAfter();
+
+    $_itemsInRow = empty($_settings['perslide']) ? 4 : intval($_settings['perslide']);
+
+    $_header = array_key_exists('header', $_settings) ? $_settings['header'] : $this->__('Products');
+
+    $_itemClass = 'separated-item-2  grid';
+
+    $_widthLg = empty($_settings['lg']) ?
+        '' : $_settings['lg'];
+    $_widthMd = empty($_settings['md']) ?
+        '' : $_settings['md'];
+    $_widthSm = empty($_settings['sm']) ?
+        '6' : $_settings['sm'];
+    $_widthXs = empty($_settings['xs']) ?
+        '' : $_settings['xs'];
+
+    if ($_widthLg) {
+        $_itemClass .= ' col-lg-' . $_widthLg;
+    }
+    if ($_widthMd) {
+        $_itemClass .= ' col-md-' . $_widthMd;
+    }
+    if ($_widthSm) {
+        $_itemClass .= ' col-sm-' . $_widthSm;
+    }
+    if ($_widthXs) {
+        $_itemClass .= ' col-xs-' . $_widthXs;
+    }
+?>
+<div class="data-control-id-3211 bd-productsslider-1">
+    <div class="bd-container-inner">
+        <div class="data-control-id-68050 bd-block-8">
+            <?php if ($_header): ?>
+            <div class="data-control-id-69842 bd-blockheader bd-tagstyles">
+                <h4><?php echo $_header ?></h4>
+            </div>
+            <?php endif ?>
+            <div class="data-control-id-69843 bd-blockcontent bd-tagstyles shape-only">
+            <div class="data-control-id-398638 bd-grid-13">
+              <div class="container-fluid">
+                <div class="separated-grid row">
+                    <div class="carousel slide<?php if ($_itemsCount <= $_itemsInRow): ?> single<?php endif ?> adjust-slides">
+                        <div class="carousel-inner">
+                            <?php foreach ($_items as $_product): ?>
+                                <?php if ($_i % $_itemsInRow === 0): ?>
+                                    <div class="item<?php if ($_i == 0): ?> active<?php endif ?>">
+                                <?php endif ?>
+                                        <div class="<?php echo $_itemClass; ?>">
+                                            <div class="data-control-id-3198 bd-griditem-2">
+                                                <?php if ($_related): ?>
+                                                    <?php if (!$_product->isComposite() && $_product->isSaleable() && !$_product->getRequiredOptions()): ?>
+                                                        <input type="checkbox" class="checkbox related-checkbox"
+                                                               id="related-checkbox<?php echo $_product->getId() ?>"
+                                                               name="related_products[]"
+                                                               value="<?php echo $_product->getId() ?>">
+                                                    <?php endif ?>
+                                                <?php endif ?>
+                                                <?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/image', 2)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/product-new', 1)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('products-grid/product-sale', 1)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/out-of-stock', 1)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+    <?php echo $_helper->createTemplate('product/title', 3)->setProduct($_product)->toHtml() ?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_priceContent = $this instanceof Mage_Catalog_Block_Product_Abstract ?
+                        $this->getPriceHtml($_product, true) :
+                        $_helper->getPriceHtml($_product);
+
+    echo $_helper->createTemplate('product/price', 2)
+        ->setContent($_priceContent)
+        ->toHtml()
+?>
+<?php endif ?>
+	
+		<?php if ($_helper = Mage::registry('templateHelper')): ?>
+<?php
+    $_data = array(
+        'is_overview' => isset($_isOverview) && $_isOverview,
+        'context' => $this,
+        'product' => $_product
+    );
+    echo $_helper->createTemplate('product/buy', 1)->addData($_data)->toHtml()
+?>
+<?php endif ?>
+                                            </div>
+                                        </div>
+
+                                        <?php if (is_callable($_after)): ?>
+                                            <?php $_after($_product); ?>
+                                        <?php endif ?>
+                                <?php if (($_i + 1) % $_itemsInRow === 0 || $_i === $_itemsCount - 1): ?>
+                                    </div>
+                                <?php endif ?>
+                                <?php $_i++ ?>
+                            <?php endforeach ?>
+                        </div>
+                        <?php if ($_itemsCount > $_itemsInRow): ?>
+                                
+                                    <div class="bd-left-button">
+    <a class="data-control-id-3208 bd-carousel-1" href="#">
+        <span></span>
+    </a>
+</div>
+
+<div class="bd-right-button">
+    <a class="data-control-id-3208 bd-carousel-1" href="#">
+        <span></span>
+    </a>
+</div>
+                        <?php endif ?>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<?php endif ?>
